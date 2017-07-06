@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
+import { SortableContainer, SortableElement} from 'react-sortable-hoc';
 import { Card, CardText } from 'material-ui/Card';
 import { List } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
@@ -38,9 +38,10 @@ export default class Categoria extends Component {
 //hago el push a la db para crear un nuevo pructo vacio. lo asigno a la ultima posicion de de objeto items.
   agregarProducto = () => {
     const nuevaPos = this.state.items.length
-    var immediatelyAvailableReference = base.push('restaurantes/oconnells', {
+    var immediatelyAvailableReference = base.push('restaurantes/oconnells/menu/', {
     data: {name: '',
-          type: '',
+          descripcion: '',
+          precio:'',
           pos: nuevaPos},
         });
   }
