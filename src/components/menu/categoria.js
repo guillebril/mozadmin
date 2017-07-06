@@ -59,16 +59,15 @@ export default class Categoria extends Component {
       items[posi-1].pos = posi
       posi--
       }
-      items[oldIndex].pos= newIndex
-    } else {
-      var posi = newIndex
+    }
+    else {
+      var posi = oldIndex
       for (var i = 0; i < newIndex - oldIndex; i++) {
-        items[posi].pos = posi+1
+        items[posi+1].pos = posi
         posi++
       }
-        items[oldIndex].pos= newIndex
     }
-
+    items[oldIndex].pos= newIndex
 
     this.setState({items: items});
   };
