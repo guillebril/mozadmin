@@ -12,25 +12,16 @@ export default class Itemp extends Component {
       value: props.value,
       editando: false,
     };
-
   }
-
   onGestionarEdicion = (inicial, nuevo) =>{
-
     this.props.onGestionarEdicion(this.props.value.name,
       inicial.target.value, this.props.value.pos)
   }
 
-
-
   render(
   gestionarApertura = () =>{
     this.setState({editando: !this.state.editando})
-
    }
-
-
-
   ) {
     return(
 

@@ -1,3 +1,9 @@
+.rootcont: {
+  display: 'flex';
+  flexWrap: 'wrap';
+  justifyContent: 'space-around';
+}
+
 .contenedor {
   display: flex;
   padding: 15px;

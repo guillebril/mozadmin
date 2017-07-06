@@ -1,109 +1,67 @@
 import React, { Component } from 'react';
-import { SortableContainer, SortableElement, arrayMove,  } from 'react-sortable-hoc';
+import { SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 import { Card, CardText } from 'material-ui/Card';
 import { List } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 
-
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-
 
 import Itemp from './itemp';
 import base from '../../rebase';
 
 
 
-const SortableItem = SortableElement(({ value, index, onGestionarEdicion, agregarProducto }) =>
-
-  <div>
-
-  <Itemp
-    value={value}
-    index={index}
-
-    onGestionarEdicion={onGestionarEdicion}
-    agregarProducto={agregarProducto}/>
-  </div>
-);
-
-
-const SortableList = SortableContainer(({ items, onGestionarEdicion, agregarProducto }) => {
-
-  return(
-    <List>
-      <Subheader>Cervezas
-        <FloatingActionButton
-          style={{float: 'right'}}
-          onTouchTap={agregarProducto}>
-        <ContentAdd />
-      </FloatingActionButton>
-    </Subheader>
-
-  {
-
-
-
-    items.map((value, index) => (
-
-        <SortableItem key={value.key}
-          index={index}
-          value={value}
-          onGestionarEdicion={onGestionarEdicion} />
-    ))}
-  </List>
-
-  );
-
-});
-
-
+//Este componente maneja transacciones
 export default class Categoria extends Component {
   constructor(props) {
         super(props);
-        this.state = {items:
-          //['IPA Cerventum', 'Goose IPA', 'Cream Stout', 'Honey', 'Item 5', 'Item 6']
-          []
-        };
+        this.state = {items:[]}
         this.onSortEnd = this.onSortEnd.bind(this);
-        this.onGestionarEdicion = this.onGestionarEdicion.bind(this);
+        this.onGestionarEdicion= this.onGestionarEdicion.bind(this);
         this.agregarProducto= this.agregarProducto.bind(this);
     }
+
+ //Uso re-base para sincronizar el estado del objeto items con la db
     componentDidMount() {
-      base.syncState('restaurantes/', {
+      base.syncState('restaurantes/oconnells', {
         context: this,
         state: 'items',
         queries: {
-        orderByChild: 'pos',
-      },
+          orderByChild: 'pos'
+                  },
         keepKeys: true,
         asArray: true
       });
     }
 
+//hago el push a la db para crear un nuevo pructo vacio. lo asigno a la ultima posicion de de objeto items.
   agregarProducto = () => {
     const nuevaPos = this.state.items.length
-    var immediatelyAvailableReference = base.push('restaurantes', {
-    data: {name: 'George',
-          type: 'Grizzly',
+    var immediatelyAvailableReference = base.push('restaurantes/oconnells', {
+    data: {name: '',
+          type: '',
           pos: nuevaPos},
-  });
-  //available immediately, you don't have to wait for the callback to be called
-  //var generatedKey = immediatelyAvailableReference.key;
+        });
   }
 
+//re-ordeno los objetos luego de desplazar un item.
   onSortEnd = ({ oldIndex, newIndex }) => {
     this.setState({
     items: arrayMove(this.state.items, oldIndex, newIndex)
     });
   };
 
-  onGestionarEdicion = (inicial, nuevo, indice) => {
-        const items = this.state.items;
-        items[indice].name = nuevo;
-        this.setState({ items : items})
+
+//actualizo el objeto items cada vez que edito un elemento.
+  onGestionarEdicion = (inicial, nuevo, posicion) => {
+    const items = this.state.items;
+    items[posicion].name = nuevo;
+    this.setState({ items : items})
   };
 
+
+  //devuelve un SortableList con los props naranjas
   render() {
     return(
     <Card className='categoria_targeta'>
@@ -113,11 +71,46 @@ export default class Categoria extends Component {
            pressDelay={150}
            onSortEnd={this.onSortEnd}
            onGestionarEdicion={this.onGestionarEdicion}
-           agregarProducto={this.agregarProducto}
-             />
-
+           agregarProducto={this.agregarProducto}/>
       </CardText>
   </Card>
     )
   }
 }
+
+
+//Este compoenente genera la categoria
+const SortableList = SortableContainer(({ items, onGestionarEdicion, agregarProducto }) => {
+//Muestra la lista
+  return(
+    <List>
+      <Subheader>Cervezas
+        <FloatingActionButton
+          style={{float: 'right'}}
+          onTouchTap={agregarProducto}>
+        <ContentAdd />
+      </FloatingActionButton>
+    </Subheader>
+  {
+//Hace un loop por todos los objetos de items y por cada uno crea un sortableItem y le pasa los porops naranjas
+    items.map((value, index) => (
+        <SortableItem key={value.key}
+          index={index}
+          value={value}
+          onGestionarEdicion={onGestionarEdicion} />
+    ))}
+  </List>
+  );
+});
+
+
+//Este componente  genera los items de la lista. Es stateless
+const SortableItem = SortableElement(({ value, index, onGestionarEdicion, agregarProducto }) =>
+  <div>
+  <Itemp
+    value={value}
+    index={index}
+    onGestionarEdicion={onGestionarEdicion}
+/>
+  </div>
+);
