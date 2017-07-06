@@ -47,9 +47,30 @@ export default class Categoria extends Component {
 
 //re-ordeno los objetos luego de desplazar un item.
   onSortEnd = ({ oldIndex, newIndex }) => {
-    this.setState({
-    items: arrayMove(this.state.items, oldIndex, newIndex)
-    });
+    const items = this.state.items
+    // pongo en la nueva pos al elemento que esta en la vieja
+    items[oldIndex].pos = 999
+    var claveitem = items[oldIndex].key
+
+
+    if(oldIndex > newIndex){
+      var posi = oldIndex
+      for (var i = 0; i < oldIndex - newIndex; i++) {
+      items[posi-1].pos = posi
+      posi--
+      }
+      items[oldIndex].pos= newIndex
+    } else {
+      var posi = newIndex
+      for (var i = 0; i < newIndex - oldIndex; i++) {
+        items[posi].pos = posi+1
+        posi++
+      }
+        items[oldIndex].pos= newIndex
+    }
+
+
+    this.setState({items: items});
   };
 
 
