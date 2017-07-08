@@ -125,7 +125,7 @@ export default class Categorias extends Component {
 
 
 //Este compoenente genera la categoria
-const SortableList = SortableContainer(({ categorias, onGestionarEdicion, onGestionarDisponibilidad , agregarCategoria, onBorrar }) => {
+const SortableList = SortableContainer(({ categorias, onGestionarEdicionCategoria, onGestionarDisponibilidadCategoria , agregarCategoria, onBorrarCategoria }) => {
 //Muestra la lista
   return(
     <div>
@@ -151,9 +151,9 @@ const SortableList = SortableContainer(({ categorias, onGestionarEdicion, onGest
         <SortableItem key={value.key}
           index={index}
           value={value}
-          onBorrarCategoria={onBorrar}
-          onGestionarEdicionCategoria={onGestionarEdicion}
-          onGestionarDisponibilidadCategoria={onGestionarDisponibilidad}
+          onBorrarCategoria={onBorrarCategoria}
+          onGestionarEdicionCategoria={onGestionarEdicionCategoria}
+          onGestionarDisponibilidadCategoria={onGestionarDisponibilidadCategoria}
            />
     ))}
 
@@ -164,7 +164,7 @@ const SortableList = SortableContainer(({ categorias, onGestionarEdicion, onGest
 
 
 //Este componente  genera los categorias de la lista. Es stateless
-const SortableItem = SortableElement(({ value, index, onGestionarEdicionCategoria, agregarCategoria, onGestionarDisponibilidadCategoria , onBorrarCategoria }) =>
+const SortableItem = SortableElement(({ value, index, onGestionarEdicionCategoria, agregarCategoria, onGestionarDisponibilidadCategoria , onBorrarCategoria, categoriaKey }) =>
   <div >
   <Categoria
     value={value}

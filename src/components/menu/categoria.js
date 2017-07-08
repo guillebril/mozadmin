@@ -25,7 +25,8 @@ export default class Categoria extends Component {
 
  //Uso re-base para sincronizar el estado del objeto items con la db
     componentDidMount() {
-      base.syncState('restaurantes/oconnells', {
+
+      base.syncState('restaurantes/oconnells/menu/', {
         context: this,
         state: 'items',
         queries: {
@@ -38,8 +39,9 @@ export default class Categoria extends Component {
 
 //hago el push a la db para crear un nuevo pructo vacio. lo asigno a la ultima posicion de de objeto items.
   agregarProducto = () => {
+
     const nuevaPos = this.state.items.length
-    var immediatelyAvailableReference = base.push('restaurantes/oconnells/', {
+    var immediatelyAvailableReference = base.push('restaurantes/oconnells/menu/', {
     data: {name: '',
           descripcion: '',
           precio:'',
@@ -144,12 +146,15 @@ const SortableList = SortableContainer(({ items, onGestionarEdicion, onGestionar
           onTouchTap={agregarProducto}>
         <ContentAdd />
       </FloatingActionButton>
-    
+
     </Subheader>
   {
+
 //Hace un loop por todos los objetos de items y por cada uno crea un sortableItem y le pasa los porops naranjas
+
     items.map((value, index) => (
-        <SortableItem key={value.key}
+        <SortableItem
+          key={value.key}
           index={index}
           value={value}
           onBorrar={onBorrar}
