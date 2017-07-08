@@ -13,9 +13,17 @@ export default class Itemp extends Component {
       editando: false,
     };
   }
-  onGestionarEdicion = (inicial, nuevo) =>{
-    this.props.onGestionarEdicion(this.props.value.name,
-      inicial.target.value, this.props.value.pos)
+  onGestionarEdicion = (nuevo) =>{
+    console.log('this.props.value.nombre: ' + this.props.value.nombre)
+    console.log('nuevo.target.value ' + nuevo.target.value)
+    console.log('nuevo.target.nombre ' + nuevo.target.id.value)
+    this.props.onGestionarEdicion(
+      //el valor del elemento nombre del elemeto
+      this.props.value.nombre,
+      //el valor nuevo valor del elemento
+      nuevo.target.value,
+      //la posicion del elemento
+      this.props.value.pos)
   }
 
   render(
@@ -45,7 +53,7 @@ export default class Itemp extends Component {
             <div className="item_editar_nombre">
               <TextField
               fullWidth={true}
-              value={this.props.value.name}
+              value={this.props.value.nombre}
               onChange={this.onGestionarEdicion}
               name='nombre'/>
             </div>
@@ -56,11 +64,12 @@ export default class Itemp extends Component {
               fullWidth={true}
               multiLine={true}
               rows={2}
+              name='descripcion'
               value={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed."}/>
             </div>
             <div className="item_editar_precio">
               <TextField
-              id='precio'
+              name="precio"
               fullWidth={true}
               value={'$95'}/>
             </div>
@@ -69,7 +78,7 @@ export default class Itemp extends Component {
           :
 
           <span>
-            {this.props.value.name}
+            {this.props.value.nombre}
             <div className="menu_producto" >
               <div className="item_descripcion">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.
