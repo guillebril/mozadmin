@@ -4,6 +4,8 @@ import Divider from 'material-ui/Divider';
 import TextField from 'material-ui/TextField';
 
 import ActionDelete from 'material-ui/svg-icons/action/delete';
+import FontIcon from 'material-ui/FontIcon';
+import IconButton from 'material-ui/IconButton';
 
 
 
@@ -84,7 +86,11 @@ export default class Itemp extends Component {
               />
             </div>
             <div className="item_eliminar_producto">
-              <ActionDelete />
+              <IconButton
+                tooltip="Borrar"
+                >
+                <ActionDelete/>
+                </IconButton>
             </div>
           </div>
 
