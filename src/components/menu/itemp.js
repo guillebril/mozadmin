@@ -94,7 +94,7 @@ export default class Itemp extends Component {
             <div className="item_eliminar_producto">
               <p><IconButton
                   tooltip="Borrar"
-                  onTouchTap={this.onBorrar(this.props.value.key)}
+                  onTouchTap={() => this.onBorrar(this.props.value.key)}
                   >
                 <ActionDelete/>
                 </IconButton>
