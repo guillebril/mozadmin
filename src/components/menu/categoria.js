@@ -38,7 +38,7 @@ export default class Categoria extends Component {
 //hago el push a la db para crear un nuevo pructo vacio. lo asigno a la ultima posicion de de objeto items.
   agregarProducto = () => {
     const nuevaPos = this.state.items.length
-    var immediatelyAvailableReference = base.push('restaurantes/oconnells/menu/', {
+    var immediatelyAvailableReference = base.push('restaurantes/oconnells/', {
     data: {name: '',
           descripcion: '',
           precio:'',
