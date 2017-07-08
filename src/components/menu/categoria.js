@@ -20,6 +20,7 @@ export default class Categoria extends Component {
         this.onSortEnd = this.onSortEnd.bind(this);
         this.onGestionarEdicion= this.onGestionarEdicion.bind(this);
         this.agregarProducto= this.agregarProducto.bind(this);
+        this.onBorrar=this.onBorrar.bind(this);
     }
 
  //Uso re-base para sincronizar el estado del objeto items con la db
@@ -114,7 +115,9 @@ export default class Categoria extends Component {
            pressDelay={150}
            onSortEnd={this.onSortEnd}
            onGestionarEdicion={this.onGestionarEdicion}
+           onBorrar={this.onBorrar}
            agregarProducto={this.agregarProducto}/>
+
       </CardText>
   </Card>
     )
@@ -123,7 +126,7 @@ export default class Categoria extends Component {
 
 
 //Este compoenente genera la categoria
-const SortableList = SortableContainer(({ items, onGestionarEdicion, agregarProducto }) => {
+const SortableList = SortableContainer(({ items, onGestionarEdicion, agregarProducto, onBorrar }) => {
 //Muestra la lista
   return(
     <List>
@@ -140,6 +143,7 @@ const SortableList = SortableContainer(({ items, onGestionarEdicion, agregarProd
         <SortableItem key={value.key}
           index={index}
           value={value}
+          onBorrar={onBorrar}
           onGestionarEdicion={onGestionarEdicion} />
     ))}
   </List>
@@ -148,11 +152,12 @@ const SortableList = SortableContainer(({ items, onGestionarEdicion, agregarProd
 
 
 //Este componente  genera los items de la lista. Es stateless
-const SortableItem = SortableElement(({ value, index, onGestionarEdicion, agregarProducto }) =>
+const SortableItem = SortableElement(({ value, index, onGestionarEdicion, agregarProducto, onBorrar }) =>
   <div>
   <Itemp
     value={value}
     index={index}
+    onBorrar={onBorrar}
     onGestionarEdicion={onGestionarEdicion}
 />
   </div>

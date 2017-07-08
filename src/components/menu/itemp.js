@@ -34,10 +34,16 @@ export default class Itemp extends Component {
         )
   }
 
+  onBorrar = (key) =>{
+    this.props.onBorrar(key)
+
+  }
+
   render(
   gestionarApertura = () =>{
     this.setState({editando: !this.state.editando})
    }
+
   ) {
     return(
 
@@ -86,11 +92,13 @@ export default class Itemp extends Component {
               />
             </div>
             <div className="item_eliminar_producto">
-              <IconButton
-                tooltip="Borrar"
-                >
+              <p><IconButton
+                  tooltip="Borrar"
+                  onTouchTap={this.onBorrar(this.props.value.key)}
+                  >
                 <ActionDelete/>
                 </IconButton>
+              </p>
             </div>
           </div>
 
