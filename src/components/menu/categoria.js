@@ -96,6 +96,14 @@ export default class Categoria extends Component {
   };
 
 
+ onBorrar = (key) =>{
+   base.remove('restaurantes/oconnells/'+ key, function(err){
+   if(!err){
+
+   }
+ });
+ }
+
   //devuelve un SortableList con los props naranjas
   render() {
     return(
