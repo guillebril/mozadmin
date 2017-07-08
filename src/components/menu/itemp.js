@@ -7,7 +7,7 @@ import ActionDelete from 'material-ui/svg-icons/action/delete';
 import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 
-
+import Toggle from 'material-ui/Toggle';
 
 export default class Itemp extends Component {
   constructor(props) {
@@ -18,8 +18,9 @@ export default class Itemp extends Component {
     };
   }
   onGestionarEdicion = (nuevo) =>{
+    console.log('NUEVO '+ JSON.stringify(nuevo.target.value))
     console.log('this.props.value.nombre: ' + this.props.value.nombre)
-    console.log('nuevo.target.value ' + nuevo.target.value)
+   //console.log('nuevo.target.value ' + nuevo.target.value)
     console.log('nuevo.target.nombre ' + nuevo.target.name)
     this.props.onGestionarEdicion(
 
@@ -34,6 +35,11 @@ export default class Itemp extends Component {
         )
   }
 
+  onGestionarDisponibilidad (disponibilidad){
+  console.log(disponibilidad);
+    this.props.onGestionarDisponibilidad (disponibilidad,   this.props.value.pos)
+  }
+
   onBorrar = (key) =>{
     this.props.onBorrar(key)
 
@@ -42,6 +48,8 @@ export default class Itemp extends Component {
   render(
   gestionarApertura = () =>{
     this.setState({editando: !this.state.editando})
+
+
    }
 
   ) {
@@ -92,13 +100,24 @@ export default class Itemp extends Component {
               />
             </div>
             <div className="item_eliminar_producto">
-              <p><IconButton
+              <IconButton
                   tooltip="Borrar"
                   onTouchTap={() => this.onBorrar(this.props.value.key)}
                   >
                 <ActionDelete/>
                 </IconButton>
-              </p>
+
+            </div>
+
+            <div>
+              <Toggle
+                 label="disponible"
+
+                 name='disponibilidad'
+                 toggled={this.props.value.disponibilidad}
+                 onToggle={()=> this.onGestionarDisponibilidad(this.props.value.disponibilidad)}
+
+               />
             </div>
           </div>
 

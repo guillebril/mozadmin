@@ -43,6 +43,7 @@ export default class Categoria extends Component {
     data: {name: '',
           descripcion: '',
           precio:'',
+          disponible: true,
           pos: nuevaPos},
         });
   }
@@ -77,7 +78,7 @@ export default class Categoria extends Component {
 
 //actualizo el objeto items cada vez que edito un elemento.
   onGestionarEdicion = (inicial, nuevo, posicion, elemento) => {
-
+    console.log(nuevo)
     const items = this.state.items;
     switch (elemento) {
       case 'nombre':
@@ -89,12 +90,19 @@ export default class Categoria extends Component {
       case 'precio':
             items[posicion].precio = nuevo;
         break;
+
       default:
 
     }
 
     this.setState({ items : items})
   };
+
+  onGestionarDisponibilidad = (disponibilidad, posicion) =>{
+      const items = this.state.items;
+    items[posicion].disponibilidad = !disponibilidad;
+      this.setState({ items : items})
+  }
 
 
  onBorrar = (key) =>{
@@ -116,8 +124,8 @@ export default class Categoria extends Component {
            onSortEnd={this.onSortEnd}
            onGestionarEdicion={this.onGestionarEdicion}
            onBorrar={this.onBorrar}
-           agregarProducto={this.agregarProducto}/>
-
+           agregarProducto={this.agregarProducto}
+         onGestionarDisponibilidad={this.onGestionarDisponibilidad}/>
       </CardText>
   </Card>
     )
@@ -126,7 +134,7 @@ export default class Categoria extends Component {
 
 
 //Este compoenente genera la categoria
-const SortableList = SortableContainer(({ items, onGestionarEdicion, agregarProducto, onBorrar }) => {
+const SortableList = SortableContainer(({ items, onGestionarEdicion, onGestionarDisponibilidad , agregarProducto, onBorrar }) => {
 //Muestra la lista
   return(
     <List>
@@ -144,7 +152,9 @@ const SortableList = SortableContainer(({ items, onGestionarEdicion, agregarProd
           index={index}
           value={value}
           onBorrar={onBorrar}
-          onGestionarEdicion={onGestionarEdicion} />
+          onGestionarEdicion={onGestionarEdicion}
+          onGestionarDisponibilidad={onGestionarDisponibilidad}
+           />
     ))}
   </List>
   );
@@ -152,13 +162,14 @@ const SortableList = SortableContainer(({ items, onGestionarEdicion, agregarProd
 
 
 //Este componente  genera los items de la lista. Es stateless
-const SortableItem = SortableElement(({ value, index, onGestionarEdicion, agregarProducto, onBorrar }) =>
+const SortableItem = SortableElement(({ value, index, onGestionarEdicion, agregarProducto, onGestionarDisponibilidad , onBorrar }) =>
   <div>
   <Itemp
     value={value}
     index={index}
     onBorrar={onBorrar}
     onGestionarEdicion={onGestionarEdicion}
+    onGestionarDisponibilidad={onGestionarDisponibilidad}
 />
   </div>
 );
