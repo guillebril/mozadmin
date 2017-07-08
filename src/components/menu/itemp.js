@@ -3,6 +3,8 @@ import {  ListItem } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import TextField from 'material-ui/TextField';
 
+import ActionDelete from 'material-ui/svg-icons/action/delete';
+
 
 
 export default class Itemp extends Component {
@@ -80,6 +82,9 @@ export default class Itemp extends Component {
               onChange={this.onGestionarEdicion}
               fullWidth={true}
               />
+            </div>
+            <div className="item_eliminar_producto">
+              <ActionDelete />
             </div>
           </div>
 
