@@ -23,17 +23,19 @@
 }
 
 .item_precio {
-  flex-grow: 1 !important;
+  width: 15%;
+  padding-left: 12px;
+  align-self: flex-end;
+  text-align: right;
   padding-left: 16px;
-  align-self: center;
-  text-align: center;
   font-size: 15px;
 
 }
 
 .item_descripcion{
   color: #888 !important;
-  font-size: 85%;
+  width: 80%;
+  font-size: 80%;
 
 }
 

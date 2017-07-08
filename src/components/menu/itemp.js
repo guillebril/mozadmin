@@ -76,7 +76,7 @@ export default class Itemp extends Component {
             <div className="item_editar_precio">
               <TextField
               name="precio"
-              value={this.props.value.precio}
+              value={'$' + this.props.value.precio}
               onChange={this.onGestionarEdicion}
               fullWidth={true}
               />
@@ -92,7 +92,7 @@ export default class Itemp extends Component {
               {this.props.value.descripcion}
                 </div>
               <div className="item_precio" >
-              {this.props.value.precio}
+              ${this.props.value.precio}
               </div>
           </div>
           </span>
