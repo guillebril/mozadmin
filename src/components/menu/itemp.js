@@ -16,14 +16,18 @@ export default class Itemp extends Component {
   onGestionarEdicion = (nuevo) =>{
     console.log('this.props.value.nombre: ' + this.props.value.nombre)
     console.log('nuevo.target.value ' + nuevo.target.value)
-    console.log('nuevo.target.nombre ' + nuevo.target.id.value)
+    console.log('nuevo.target.nombre ' + nuevo.target.name)
     this.props.onGestionarEdicion(
+
       //el valor del elemento nombre del elemeto
       this.props.value.nombre,
       //el valor nuevo valor del elemento
       nuevo.target.value,
       //la posicion del elemento
-      this.props.value.pos)
+      this.props.value.pos,
+      //nombre del elemento que estoy editando
+      nuevo.target.name,
+        )
   }
 
   render(
@@ -62,16 +66,20 @@ export default class Itemp extends Component {
               id='descripcion'
               style={{color: '#888', fontSize: '14px' ,lineHeight: '20px'  }}
               fullWidth={true}
+              value={this.props.value.descripcion}
+              onChange={this.onGestionarEdicion}
               multiLine={true}
               rows={2}
               name='descripcion'
-              value={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed."}/>
+              />
             </div>
             <div className="item_editar_precio">
               <TextField
               name="precio"
+              value={this.props.value.precio}
+              onChange={this.onGestionarEdicion}
               fullWidth={true}
-              value={'$95'}/>
+              />
             </div>
           </div>
 
@@ -81,10 +89,10 @@ export default class Itemp extends Component {
             {this.props.value.nombre}
             <div className="menu_producto" >
               <div className="item_descripcion">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.
+              {this.props.value.descripcion}
                 </div>
               <div className="item_precio" >
-              $90
+              {this.props.value.precio}
               </div>
           </div>
           </span>

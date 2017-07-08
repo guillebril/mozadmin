@@ -75,9 +75,23 @@ export default class Categoria extends Component {
 
 
 //actualizo el objeto items cada vez que edito un elemento.
-  onGestionarEdicion = (inicial, nuevo, posicion) => {
+  onGestionarEdicion = (inicial, nuevo, posicion, elemento) => {
+
     const items = this.state.items;
-    items[posicion].nombre = nuevo;
+    switch (elemento) {
+      case 'nombre':
+        items[posicion].nombre = nuevo;
+          break;
+      case 'descripcion':
+          items[posicion].descripcion = nuevo;
+            break;
+      case 'precio':
+            items[posicion].precio = nuevo;
+        break;
+      default:
+
+    }
+
     this.setState({ items : items})
   };
 
