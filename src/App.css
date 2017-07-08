@@ -9,10 +9,21 @@
   padding: 15px;
 }
 
-.categoria_targeta {
+/*========CATEGORIAS==============*/
+.categorias_tarjetas{
+  display: flex;
+}
+
+
+
+
+
+/*========CATEGORIA==============*/
+.categoria_tarjeta {
   z-index: 0 !important;
-  width: 100%;
-  max-width: 320px;
+  margin-left: 15px;
+  margin-right: 15px;
+  width: 320px;
 }
 
 

@@ -18,10 +18,7 @@ export default class Itemp extends Component {
     };
   }
   onGestionarEdicion = (nuevo) =>{
-    console.log('NUEVO '+ JSON.stringify(nuevo.target.value))
-    console.log('this.props.value.nombre: ' + this.props.value.nombre)
-   //console.log('nuevo.target.value ' + nuevo.target.value)
-    console.log('nuevo.target.nombre ' + nuevo.target.name)
+  
     this.props.onGestionarEdicion(
 
       //el valor del elemento nombre del elemeto
@@ -91,10 +88,10 @@ export default class Itemp extends Component {
               name='descripcion'
               />
             </div>
-            <div className="item_editar_precio">
+            <div className="item_editar_precio"> $
               <TextField
               name="precio"
-              value={'$' + this.props.value.precio}
+              value={this.props.value.precio}
               onChange={this.onGestionarEdicion}
               fullWidth={true}
               />

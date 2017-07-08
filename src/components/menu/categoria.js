@@ -78,7 +78,7 @@ export default class Categoria extends Component {
 
 //actualizo el objeto items cada vez que edito un elemento.
   onGestionarEdicion = (inicial, nuevo, posicion, elemento) => {
-    console.log(nuevo)
+
     const items = this.state.items;
     switch (elemento) {
       case 'nombre':
@@ -116,7 +116,7 @@ export default class Categoria extends Component {
   //devuelve un SortableList con los props naranjas
   render() {
     return(
-    <Card className='categoria_targeta'>
+    <Card className='categoria_tarjeta'>
       <CardText>
          <SortableList
            items={this.state.items}
@@ -140,10 +140,11 @@ const SortableList = SortableContainer(({ items, onGestionarEdicion, onGestionar
     <List>
       <Subheader>Cervezas
         <FloatingActionButton
-          style={{float: 'right'}}
+          style={{float: 'right',}}
           onTouchTap={agregarProducto}>
         <ContentAdd />
       </FloatingActionButton>
+    
     </Subheader>
   {
 //Hace un loop por todos los objetos de items y por cada uno crea un sortableItem y le pasa los porops naranjas
