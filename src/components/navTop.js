@@ -8,7 +8,7 @@ export default class NavTop extends Component {
     return(
       <div className="rootcont" >
         <AppBar
-        title="Diego Genio!"
+        title="MozApp"
         iconClassNameRight="muidocs-icon-navigation-expand-more"/>
       </div>
 
