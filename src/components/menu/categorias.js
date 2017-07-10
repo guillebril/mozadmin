@@ -9,6 +9,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import Categoria from './categoria';
 import base from '../../rebase';
 
+//ARREGLACO DESPUES DE HABER METIDO LA PATA
 //Este componente maneja transacciones
 export default class Categorias extends Component {
   constructor(props) {
