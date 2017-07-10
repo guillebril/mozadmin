@@ -15,6 +15,7 @@ export default class Itemp extends Component {
     this.state = {
       value: props.value,
       editando: false,
+
     };
   }
   onGestionarEdicion = (nuevo) =>{
@@ -31,7 +32,6 @@ export default class Itemp extends Component {
   }
 
   onGestionarDisponibilidad (disponibilidad){
-    console.log(disponibilidad);
     this.props.onGestionarDisponibilidad (disponibilidad,   this.props.value.pos)
   }
 
@@ -98,8 +98,8 @@ export default class Itemp extends Component {
               <div>
                 <Toggle
                    label="disponible"
+                   defaultToggled={true}
                    name='disponibilidad'
-                   toggled={this.props.value.disponibilidad}
                    onToggle={()=> this.onGestionarDisponibilidad(this.props.value.disponibilidad)}
                  />
               </div>

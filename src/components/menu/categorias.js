@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { SortableContainer, SortableElement} from 'react-sortable-hoc';
-import { Card, CardText } from 'material-ui/Card';
-import { List } from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
+import { CardText } from 'material-ui/Card';
+
 
 import RaisedButton from 'material-ui/RaisedButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
@@ -38,7 +37,7 @@ export default class Categorias extends Component {
   agregarCategoria = () => {
     const nuevaPos = this.state.categorias.length
     var immediatelyAvailableReference = base.push('restaurantes/oconnells/menu', {
-    data: {name: '',
+    data: {nombre: 'Nombre de la categoria',
           disponible: true,
           pos: nuevaPos},
         });
@@ -167,6 +166,7 @@ const SortableList = SortableContainer(({ categorias, onGestionarEdicionCategori
 const SortableItem = SortableElement(({ value, index, onGestionarEdicionCategoria, agregarCategoria, onGestionarDisponibilidadCategoria , onBorrarCategoria, categoriaKey }) =>
   <div >
   <Categoria
+    categoriaKey={value.key}
     value={value}
     index={index}
     onBorrar={onBorrarCategoria}

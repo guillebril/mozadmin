@@ -25,8 +25,8 @@ export default class Categoria extends Component {
 
  //Uso re-base para sincronizar el estado del objeto items con la db
     componentDidMount() {
-
-      base.syncState('restaurantes/oconnells/menu/', {
+      console.log('La Categoria Key:' + this.props.categoriaKey)
+      base.syncState('restaurantes/oconnells/menu/' + this.props.categoriaKey +'/productos/', {
         context: this,
         state: 'items',
         queries: {
@@ -35,16 +35,18 @@ export default class Categoria extends Component {
         keepKeys: true,
         asArray: true
       });
+
+      console.log('key de los items:'+ this.props.value)
     }
 
 //hago el push a la db para crear un nuevo pructo vacio. lo asigno a la ultima posicion de de objeto items.
   agregarProducto = () => {
 
     const nuevaPos = this.state.items.length
-    var immediatelyAvailableReference = base.push('restaurantes/oconnells/menu/', {
-    data: {name: '',
+    var immediatelyAvailableReference = base.push('restaurantes/oconnells/menu/' + this.props.categoriaKey + '/productos/', {
+    data: {nombre: ' ',
           descripcion: '',
-          precio:'',
+          precio: '',
           disponible: true,
           pos: nuevaPos},
         });
@@ -82,6 +84,7 @@ export default class Categoria extends Component {
   onGestionarEdicion = (inicial, nuevo, posicion, elemento) => {
 
     const items = this.state.items;
+
     switch (elemento) {
       case 'nombre':
         items[posicion].nombre = nuevo;
@@ -120,7 +123,7 @@ export default class Categoria extends Component {
     return(
     <Card className='categoria_tarjeta'>
       <CardText>
-         <SortableList
+         <SortableList2
            items={this.state.items}
            pressDelay={150}
            onSortEnd={this.onSortEnd}
@@ -136,7 +139,7 @@ export default class Categoria extends Component {
 
 
 //Este compoenente genera la categoria
-const SortableList = SortableContainer(({ items, onGestionarEdicion, onGestionarDisponibilidad , agregarProducto, onBorrar }) => {
+const SortableList2 = SortableContainer(({ items, onGestionarEdicion, onGestionarDisponibilidad , agregarProducto, onBorrar }) => {
 //Muestra la lista
   return(
     <List>
@@ -153,7 +156,7 @@ const SortableList = SortableContainer(({ items, onGestionarEdicion, onGestionar
 //Hace un loop por todos los objetos de items y por cada uno crea un sortableItem y le pasa los porops naranjas
 
     items.map((value, index) => (
-        <SortableItem
+        <SortableItem2
           key={value.key}
           index={index}
           value={value}
@@ -168,7 +171,7 @@ const SortableList = SortableContainer(({ items, onGestionarEdicion, onGestionar
 
 
 //Este componente  genera los items de la lista. Es stateless
-const SortableItem = SortableElement(({ value, index, onGestionarEdicion, agregarProducto, onGestionarDisponibilidad , onBorrar }) =>
+const SortableItem2 = SortableElement(({ value, index, onGestionarEdicion, agregarProducto, onGestionarDisponibilidad , onBorrar }) =>
   <div>
   <Itemp
     value={value}
