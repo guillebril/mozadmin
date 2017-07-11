@@ -39,18 +39,25 @@ export default class Categoria extends Component {
       console.log('key de los items:'+ this.props.value)
     }
 
+
+
+
 //hago el push a la db para crear un nuevo pructo vacio. lo asigno a la ultima posicion de de objeto items.
-  agregarProducto = () => {
+  agregarProducto = ({gestionarApertura}) => {
 
     const nuevaPos = this.state.items.length
     var immediatelyAvailableReference = base.push('restaurantes/oconnells/menu/' + this.props.categoriaKey + '/productos/', {
-    data: {nombre: ' ',
+    data: {nombre: '',
           descripcion: '',
           precio: '',
-          disponible: true,
+          disponibilidad: true,
           pos: nuevaPos},
         });
+
+
   }
+
+
 
 //re-ordeno los objetos luego de desplazar un item.
   onSortEnd = ({ oldIndex, newIndex }) => {
@@ -111,7 +118,7 @@ export default class Categoria extends Component {
 
 
  onBorrar = (key) =>{
-   base.remove('restaurantes/oconnells/'+ key, function(err){
+   base.remove('restaurantes/oconnells/menu/' + this.props.categoriaKey + '/productos/' + key, function(err){
    if(!err){
 
    }
@@ -130,7 +137,7 @@ export default class Categoria extends Component {
            onGestionarEdicion={this.onGestionarEdicion}
            onBorrar={this.onBorrar}
            agregarProducto={this.agregarProducto}
-         onGestionarDisponibilidad={this.onGestionarDisponibilidad}/>
+           onGestionarDisponibilidad={this.onGestionarDisponibilidad}/>
       </CardText>
   </Card>
     )

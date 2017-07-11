@@ -39,18 +39,21 @@ export default class Itemp extends Component {
     this.props.onBorrar(key)
   }
 
-  render(
+
   gestionarApertura = () =>{
     this.setState({editando: !this.state.editando})
-   })
+   }
+
+  render()
+
     {
       return(
         <div>
           <ListItem
             initiallyOpen={this.state.editando}
-            onNestedListToggle={gestionarApertura}
+            onNestedListToggle={this.gestionarApertura}
             secondaryTextLines={2}
-            disabled={true}
+            disabled={this.state.editando}
             primaryTogglesNestedList={true}
             className='editar_producto'
             nestedLevel={0}
@@ -62,6 +65,8 @@ export default class Itemp extends Component {
             <div className="menu_editar_producto">
               <div className="item_editar_nombre">
                 <TextField
+                hintText="Producto"
+                autoFocus
                 fullWidth={true}
                 value={this.props.value.nombre}
                 onChange={this.onGestionarEdicion}
@@ -69,13 +74,15 @@ export default class Itemp extends Component {
               </div>
               <div className="item_editar_descripcion">
                 <TextField
+
                 id='descripcion'
                 style={{color: '#888', fontSize: '14px' ,lineHeight: '20px'  }}
                 fullWidth={true}
+                hintText="descripcion.."
                 value={this.props.value.descripcion}
                 onChange={this.onGestionarEdicion}
                 multiLine={true}
-                rows={2}
+                rows={1}
                 name='descripcion'
                 />
               </div>
@@ -98,7 +105,7 @@ export default class Itemp extends Component {
               <div>
                 <Toggle
                    label="disponible"
-                   defaultToggled={true}
+                   defaultToggled={this.props.value.disponibilidad}
                    name='disponibilidad'
                    onToggle={()=> this.onGestionarDisponibilidad(this.props.value.disponibilidad)}
                  />

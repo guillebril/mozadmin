@@ -2,7 +2,6 @@
   "name": "mozadmin",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://guillebril.github.io/mozadmin",
   "dependencies": {
     "firebase": "^4.1.3",
     "material-ui": "^0.18.6",
