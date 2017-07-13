@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
-import { SortableContainer, SortableElement} from 'react-sortable-hoc';
-import { CardText } from 'material-ui/Card';
 
-
-import RaisedButton from 'material-ui/RaisedButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-
-import Categoria from './categoria';
+import ListaCategorias from './listaCategorias';
 import base from '../../rebase';
 
-//ARREGLACO DESPUES DE HABER METIDO LA PATA
 //Este componente maneja transacciones
 export default class Categorias extends Component {
   constructor(props) {
@@ -37,7 +30,7 @@ export default class Categorias extends Component {
 //hago el push a la db para crear un nuevo pructo vacio. lo asigno a la ultima posicion de de objeto categorias.
   agregarCategoria = () => {
     const nuevaPos = this.state.categorias.length
-    var immediatelyAvailableReference = base.push('restaurantes/oconnells/menu', {
+    base.push('restaurantes/oconnells/menu', {
     data: {nombre: 'Nombre de la categoria',
           disponible: true,
           pos: nuevaPos},
@@ -49,25 +42,22 @@ export default class Categorias extends Component {
     const categorias = this.state.categorias
     // pongo en la nueva pos al elemento que esta en la vieja
     categorias[oldIndex].pos = 999
-    var claveitem = categorias[oldIndex].key
 
-
+    var i = 0
+    var posi = oldIndex
     if(oldIndex > newIndex){
-      var posi = oldIndex
-      for (var i = 0; i < oldIndex - newIndex; i++) {
+      for (i; i < oldIndex - newIndex; i++) {
       categorias[posi-1].pos = posi
       posi--
       }
     }
     else {
-      var posi = oldIndex
-      for (var i = 0; i < newIndex - oldIndex; i++) {
+      for (i ; i < newIndex - oldIndex; i++) {
         categorias[posi+1].pos = posi
         posi++
       }
     }
     categorias[oldIndex].pos= newIndex
-
     this.setState({categorias: categorias});
   };
 
@@ -103,12 +93,11 @@ export default class Categorias extends Component {
  });
  }
 
-  //devuelve un SortableList con los props naranjas
+
   render() {
     return(
     <div>
-      <CardText>
-         <SortableList
+         <ListaCategorias
            categorias={this.state.categorias}
            pressDelay={150}
            axis='x'
@@ -116,63 +105,8 @@ export default class Categorias extends Component {
            onGestionarEdicioncategoria={this.onGestionarEdicioncategoria}
            onBorrarCategoria={this.onBorrarCategoria}
            agregarCategoria={this.agregarCategoria}
-         onGestionarDisponibilidadCategoria={this.onGestionarDisponibilidadCategoria}/>
-      </CardText>
+           onGestionarDisponibilidadCategoria={this.onGestionarDisponibilidadCategoria}/>
   </div>
     )
   }
 }
-
-
-//Este compoenente genera la categoria
-const SortableList = SortableContainer(({ categorias, onGestionarEdicionCategoria, onGestionarDisponibilidadCategoria , agregarCategoria, onBorrarCategoria }) => {
-//Muestra la lista
-  return(
-    <div>
-      <div >
-         <RaisedButton
-           label="Agregar Categoria"
-           style={{float: 'left', display: 'block', marginLeft: '15px'}}
-           onTouchTap={agregarCategoria}
-           primary={true}
-            />
-          <br/><br/><br/>
-      </div>
-
-
-
-        <div className='categorias_tarjetas'>
-  {
-//Hace un loop por todos los objetos de categorias y por cada uno crea un sortableItem y le pasa los porops naranjas
-
-
-    categorias.map((value, index) => (
-
-        <SortableItem key={value.key}
-          index={index}
-          value={value}
-          onBorrarCategoria={onBorrarCategoria}
-          onGestionarEdicionCategoria={onGestionarEdicionCategoria}
-          onGestionarDisponibilidadCategoria={onGestionarDisponibilidadCategoria}
-           />
-    ))}
-
-    </div>
-  </div>
-  );
-});
-
-
-//Este componente  genera los categorias de la lista. Es stateless
-const SortableItem = SortableElement(({ value, index, onGestionarEdicionCategoria, agregarCategoria, onGestionarDisponibilidadCategoria , onBorrarCategoria, categoriaKey }) =>
-  <div >
-  <Categoria
-    categoriaKey={value.key}
-    value={value}
-    index={index}
-    onBorrar={onBorrarCategoria}
-    onGestionarEdicion={onGestionarEdicionCategoria}
-    onGestionarDisponibilidadCategoria={onGestionarDisponibilidadCategoria}
-/>
-  </div>
-);

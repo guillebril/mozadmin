@@ -4,12 +4,11 @@ import Divider from 'material-ui/Divider';
 import TextField from 'material-ui/TextField';
 
 import ActionDelete from 'material-ui/svg-icons/action/delete';
-import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 
 import Toggle from 'material-ui/Toggle';
 
-export default class Itemp extends Component {
+export default class ItemProducto extends Component {
   constructor(props) {
     super(props);
     this.state = {

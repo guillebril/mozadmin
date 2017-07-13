@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
-import { SortableContainer, SortableElement} from 'react-sortable-hoc';
 import { Card, CardText } from 'material-ui/Card';
-import { List } from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
 
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-
-import Itemp from './itemp';
 import base from '../../rebase';
-
+import ListaProductos from './listaProductos'
 
 
 //Este componente maneja transacciones
-export default class Categoria extends Component {
+export default class ItemCategoria extends Component {
   constructor(props) {
         super(props);
         this.state = {items:[]}
@@ -22,10 +15,8 @@ export default class Categoria extends Component {
         this.agregarProducto= this.agregarProducto.bind(this);
         this.onBorrar=this.onBorrar.bind(this);
     }
-
  //Uso re-base para sincronizar el estado del objeto items con la db
     componentDidMount() {
-      console.log('La Categoria Key:' + this.props.categoriaKey)
       base.syncState('restaurantes/oconnells/menu/' + this.props.categoriaKey +'/productos/', {
         context: this,
         state: 'items',
@@ -35,18 +26,13 @@ export default class Categoria extends Component {
         keepKeys: true,
         asArray: true
       });
-
-      console.log('key de los items:'+ this.props.value)
     }
-
-
 
 
 //hago el push a la db para crear un nuevo pructo vacio. lo asigno a la ultima posicion de de objeto items.
   agregarProducto = ({gestionarApertura}) => {
-
     const nuevaPos = this.state.items.length
-    var immediatelyAvailableReference = base.push('restaurantes/oconnells/menu/' + this.props.categoriaKey + '/productos/', {
+    base.push('restaurantes/oconnells/menu/' + this.props.categoriaKey + '/productos/', {
     data: {nombre: '',
           descripcion: '',
           precio: '',
@@ -64,19 +50,18 @@ export default class Categoria extends Component {
     const items = this.state.items
     // pongo en la nueva pos al elemento que esta en la vieja
     items[oldIndex].pos = 999
-    var claveitem = items[oldIndex].key
-
+    var posi = oldIndex
+    var i = 0
 
     if(oldIndex > newIndex){
-      var posi = oldIndex
-      for (var i = 0; i < oldIndex - newIndex; i++) {
+
+      for (i; i < oldIndex - newIndex; i++) {
       items[posi-1].pos = posi
       posi--
       }
     }
     else {
-      var posi = oldIndex
-      for (var i = 0; i < newIndex - oldIndex; i++) {
+      for (i; i < newIndex - oldIndex; i++) {
         items[posi+1].pos = posi
         posi++
       }
@@ -130,7 +115,7 @@ export default class Categoria extends Component {
     return(
     <Card className='categoria_tarjeta'>
       <CardText>
-         <SortableList2
+         <ListaProductos
            items={this.state.items}
            pressDelay={150}
            onSortEnd={this.onSortEnd}
@@ -143,49 +128,3 @@ export default class Categoria extends Component {
     )
   }
 }
-
-
-//Este compoenente genera la categoria
-const SortableList2 = SortableContainer(({ items, onGestionarEdicion, onGestionarDisponibilidad , agregarProducto, onBorrar }) => {
-//Muestra la lista
-  return(
-    <List>
-      <Subheader>Cervezas
-        <FloatingActionButton
-          style={{float: 'right',}}
-          onTouchTap={agregarProducto}>
-        <ContentAdd />
-      </FloatingActionButton>
-
-    </Subheader>
-  {
-
-//Hace un loop por todos los objetos de items y por cada uno crea un sortableItem y le pasa los porops naranjas
-
-    items.map((value, index) => (
-        <SortableItem2
-          key={value.key}
-          index={index}
-          value={value}
-          onBorrar={onBorrar}
-          onGestionarEdicion={onGestionarEdicion}
-          onGestionarDisponibilidad={onGestionarDisponibilidad}
-           />
-    ))}
-  </List>
-  );
-});
-
-
-//Este componente  genera los items de la lista. Es stateless
-const SortableItem2 = SortableElement(({ value, index, onGestionarEdicion, agregarProducto, onGestionarDisponibilidad , onBorrar }) =>
-  <div>
-  <Itemp
-    value={value}
-    index={index}
-    onBorrar={onBorrar}
-    onGestionarEdicion={onGestionarEdicion}
-    onGestionarDisponibilidad={onGestionarDisponibilidad}
-/>
-  </div>
-);
