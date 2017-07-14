@@ -12,10 +12,11 @@ export default class ItemProducto extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      open: false,
       value: props.value,
       editando: false,
-
     };
+    this.gestionarApertura=this.gestionarApertura.bind(this)
   }
   onGestionarEdicion = (nuevo) =>{
     this.props.onGestionarEdicion(
@@ -38,9 +39,17 @@ export default class ItemProducto extends Component {
     this.props.onBorrar(key)
   }
 
+  gestionarEnter = (event) => {
+  if(event.key === 'Enter'){
+    this.setState({
+      open: !this.state.open,
+    });
+  }
+}
 
   gestionarApertura = () =>{
-    this.setState({editando: !this.state.editando})
+    this.setState({open: !this.state.open})
+
    }
 
   render()
@@ -49,17 +58,18 @@ export default class ItemProducto extends Component {
       return(
         <div>
           <ListItem
-            initiallyOpen={this.state.editando}
+            initiallyOpen={this.state.open}
+            open={this.state.open}
             onNestedListToggle={this.gestionarApertura}
             secondaryTextLines={2}
-            disabled={this.state.editando}
+            disabled={this.state.open}
             primaryTogglesNestedList={true}
             className='editar_producto'
             nestedLevel={0}
             hoverColor={'rgba(0,0,0,0)'}
             primaryText={
 
-            this.state.editando ?
+            this.state.open ?
 
             <div className="menu_editar_producto">
               <div className="item_editar_nombre">
@@ -67,6 +77,7 @@ export default class ItemProducto extends Component {
                 hintText="Producto"
                 autoFocus
                 fullWidth={true}
+                onKeyPress={this.gestionarEnter}
                 value={this.props.value.nombre}
                 onChange={this.onGestionarEdicion}
                 name='nombre'/>

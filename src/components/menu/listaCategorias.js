@@ -19,6 +19,7 @@ const ListaCategorias = SortableContainer(({ categorias, onGestionarEdicionCateg
             />
           <br/><br/><br/>
       </div>
+
         <div className='categorias_tarjetas'>
   {
     categorias.map((value, index) => (

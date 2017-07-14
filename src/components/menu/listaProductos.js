@@ -4,6 +4,10 @@ import { List } from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+
+
 
 
 import ProductoContenedor from './productoContenedor'
@@ -14,15 +18,11 @@ const ListaProductos = SortableContainer(({ items, onGestionarEdicion, onGestion
   return(
     <List>
       <Subheader>Cervezas
-        <FloatingActionButton
-          style={{float: 'right',}}
-          onTouchTap={agregarProducto}>
-        <ContentAdd />
-      </FloatingActionButton>
 
     </Subheader>
-  {
 
+
+  {
     items.map((value, index) => (
         <ProductoContenedor
           key={value.key}
@@ -33,6 +33,11 @@ const ListaProductos = SortableContainer(({ items, onGestionarEdicion, onGestion
           onGestionarDisponibilidad={onGestionarDisponibilidad}
            />
     ))}
+    <br/>
+      <FlatButton label="Agregar Producto" onTouchTap={agregarProducto} primary={true} />
+
+
+
   </List>
   );
 });
