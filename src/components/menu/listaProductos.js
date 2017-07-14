@@ -7,19 +7,18 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 
-
-
-
+import TituloCategoria from './tituloCategoria';
 import ProductoContenedor from './productoContenedor'
 
 //Este compoenente genera la categoria
-const ListaProductos = SortableContainer(({ items, onGestionarEdicion, onGestionarDisponibilidad , agregarProducto, onBorrar }) => {
+const ListaProductos = SortableContainer(({ items, nombreCategoria, onGestionarEdicion, onGestionarDisponibilidad , agregarProducto, onBorrar }) => {
 //Muestra la lista
   return(
     <List>
-      <Subheader>Cervezas
-
-    </Subheader>
+      <Subheader>
+        <TituloCategoria
+        nombreCategoria={nombreCategoria}/>
+      </Subheader>
 
 
   {

@@ -7,9 +7,10 @@ const CategoriaContenedor = SortableElement(({ value, index, onGestionarEdicionC
   <div >
   <ItemCategoria
     categoriaKey={value.key}
+    nombreCategoria={value.nombre}
     value={value}
     index={index}
-    onBorrar={onBorrarCategoria}
+    onBorrarCategoria={onBorrarCategoria}
     onGestionarEdicion={onGestionarEdicionCategoria}
     onGestionarDisponibilidadCategoria={onGestionarDisponibilidadCategoria}
 />

@@ -15,7 +15,7 @@ export default class Categorias extends Component {
     }
 
  //Uso re-base para sincronizar el estado del objeto categorias con la db
-    componentDidMount() {
+  componentDidMount() {
       base.syncState('restaurantes/oconnells/menu', {
         context: this,
         state: 'categorias',
@@ -61,7 +61,6 @@ export default class Categorias extends Component {
     this.setState({categorias: categorias});
   };
 
-
 //actualizo el objeto categorias cada vez que edito un elemento.
   onGestionarEdicionCategoria = (inicial, nuevo, posicion, elemento) => {
 
@@ -84,15 +83,13 @@ export default class Categorias extends Component {
       this.setState({ categorias : categorias})
   }
 
+  onBorrarCategoria = (key) =>{
+     base.remove('restaurantes/oconnells/menu'+ key, function(err){
+     if(!err){
 
- onBorrarCategoria = (key) =>{
-   base.remove('restaurantes/oconnells/menu'+ key, function(err){
-   if(!err){
-
+       }
+     });
    }
- });
- }
-
 
   render() {
     return(
@@ -106,7 +103,7 @@ export default class Categorias extends Component {
            onBorrarCategoria={this.onBorrarCategoria}
            agregarCategoria={this.agregarCategoria}
            onGestionarDisponibilidadCategoria={this.onGestionarDisponibilidadCategoria}/>
-  </div>
-    )
+    </div>
+      )
   }
 }

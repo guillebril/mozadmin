@@ -16,7 +16,7 @@ export default class ItemCategoria extends Component {
         this.onBorrar=this.onBorrar.bind(this);
     }
  //Uso re-base para sincronizar el estado del objeto items con la db
-    componentDidMount() {
+  componentDidMount() {
       base.syncState('restaurantes/oconnells/menu/' + this.props.categoriaKey +'/productos/', {
         context: this,
         state: 'items',
@@ -27,7 +27,6 @@ export default class ItemCategoria extends Component {
         asArray: true
       });
     }
-
 
 //hago el push a la db para crear un nuevo pructo vacio. lo asigno a la ultima posicion de de objeto items.
   agregarProducto = ({gestionarApertura}) => {
@@ -42,8 +41,6 @@ export default class ItemCategoria extends Component {
 
 
   }
-
-
 
 //re-ordeno los objetos luego de desplazar un item.
   onSortEnd = ({ oldIndex, newIndex }) => {
@@ -70,7 +67,6 @@ export default class ItemCategoria extends Component {
 
     this.setState({items: items});
   };
-
 
 //actualizo el objeto items cada vez que edito un elemento.
   onGestionarEdicion = (inicial, nuevo, posicion, elemento) => {
@@ -101,14 +97,13 @@ export default class ItemCategoria extends Component {
       this.setState({ items : items})
   }
 
+  onBorrar = (key) =>{
+     base.remove('restaurantes/oconnells/menu/' + this.props.categoriaKey + '/productos/' + key, function(err){
+     if(!err){
 
- onBorrar = (key) =>{
-   base.remove('restaurantes/oconnells/menu/' + this.props.categoriaKey + '/productos/' + key, function(err){
-   if(!err){
-
+       }
+     });
    }
- });
- }
 
   //devuelve un SortableList con los props naranjas
   render() {
@@ -117,14 +112,15 @@ export default class ItemCategoria extends Component {
       <CardText>
          <ListaProductos
            items={this.state.items}
+           nombreCategoria={this.props.value.nombre} 
            pressDelay={150}
            onSortEnd={this.onSortEnd}
            onGestionarEdicion={this.onGestionarEdicion}
            onBorrar={this.onBorrar}
            agregarProducto={this.agregarProducto}
            onGestionarDisponibilidad={this.onGestionarDisponibilidad}/>
-      </CardText>
-  </Card>
-    )
-  }
+        </CardText>
+      </Card>
+      )
+    }
 }
