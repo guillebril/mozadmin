@@ -20,24 +20,20 @@ const ListaProductos = SortableContainer(({ items, nombreCategoria, onGestionarE
         nombreCategoria={nombreCategoria}/>
       </Subheader>
 
-
-  {
-    items.map((value, index) => (
-        <ProductoContenedor
-          key={value.key}
-          index={index}
-          value={value}
-          onBorrar={onBorrar}
-          onGestionarEdicion={onGestionarEdicion}
-          onGestionarDisponibilidad={onGestionarDisponibilidad}
-           />
-    ))}
-    <br/>
-      <FlatButton label="Agregar Producto" onTouchTap={agregarProducto} primary={true} />
-
-
-
-  </List>
+      {
+        items.map((value, index) => (
+            <ProductoContenedor
+              key={value.key}
+              index={index}
+              value={value}
+              onBorrar={onBorrar}
+              onGestionarEdicion={onGestionarEdicion}
+              onGestionarDisponibilidad={onGestionarDisponibilidad}
+               />
+        ))}
+        <br/>
+        <FlatButton label="Agregar Producto" onTouchTap={agregarProducto} primary={true} />
+      </List>
   );
 });
 
