@@ -22,11 +22,11 @@ const ListaCategorias = SortableContainer(({ categorias, onGestionarEdicionCateg
 
         <div className='categorias_tarjetas'>
   {
-    categorias.map((value, index) => (
-
-        <CategoriaContenedor key={value.key}
+    categorias.map((categoria, index) => (
+        <CategoriaContenedor
+          key={categoria.key}
           index={index}
-          value={value}
+          categoria={categoria}
           onBorrarCategoria={onBorrarCategoria}
           onGestionarEdicionCategoria={onGestionarEdicionCategoria}
           onGestionarDisponibilidadCategoria={onGestionarDisponibilidadCategoria}

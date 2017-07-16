@@ -112,13 +112,15 @@ export default class ItemCategoria extends Component {
       <CardText>
          <ListaProductos
            items={this.state.items}
-           nombreCategoria={this.props.value.nombre} 
+           categoria={this.props.categoria}
            pressDelay={150}
            onSortEnd={this.onSortEnd}
            onGestionarEdicion={this.onGestionarEdicion}
            onBorrar={this.onBorrar}
            agregarProducto={this.agregarProducto}
-           onGestionarDisponibilidad={this.onGestionarDisponibilidad}/>
+           onGestionarDisponibilidad={this.onGestionarDisponibilidad}
+           onGestionarEdicionCategoria={this.props.onGestionarEdicionCategoria}
+           />
         </CardText>
       </Card>
       )

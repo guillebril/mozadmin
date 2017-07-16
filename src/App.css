@@ -14,6 +14,9 @@
   display: flex;
 }
 
+.checkIcono:hover svg{
+  color: rgb(0, 188, 212) !important;
+}
 
 
 
@@ -26,28 +29,34 @@
   width: 320px;
 }
 
+.vista_lista_productos{
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  justify-content: center;
+}
 
 
-.menu_producto {
-  display: flex !important;
+
+.vista_descrip_precio{
   padding-top: 5px;
+  width: 275px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.item_precio {
-  width: 15%;
-  padding-left: 12px;
-  align-self: flex-end;
-  text-align: right;
-  padding-left: 16px;
-  font-size: 15px;
-
-}
 
 .item_descripcion{
+  flex: 3;
+  font-size: 85%;
   color: #888 !important;
-  width: 80%;
-  font-size: 80%;
 
+}
+.item_precio {
+  flex: 1;
+  text-align: center;
+  align-self: right;
+  font-size: 17px;
 }
 
 .menu_editar_producto{

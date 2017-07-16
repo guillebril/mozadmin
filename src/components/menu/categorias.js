@@ -64,9 +64,10 @@ export default class Categorias extends Component {
 //actualizo el objeto categorias cada vez que edito un elemento.
   onGestionarEdicionCategoria = (inicial, nuevo, posicion, elemento) => {
 
+    console.log(elemento)
     const categorias = this.state.categorias;
     switch (elemento) {
-      case 'nombre':
+      case 'TituloCategoria':
         categorias[posicion].nombre = nuevo;
           break;
 
@@ -99,7 +100,7 @@ export default class Categorias extends Component {
            pressDelay={150}
            axis='x'
            onSortEnd={this.onSortEnd}
-           onGestionarEdicioncategoria={this.onGestionarEdicioncategoria}
+           onGestionarEdicionCategoria={this.onGestionarEdicionCategoria}
            onBorrarCategoria={this.onBorrarCategoria}
            agregarCategoria={this.agregarCategoria}
            onGestionarDisponibilidadCategoria={this.onGestionarDisponibilidadCategoria}/>

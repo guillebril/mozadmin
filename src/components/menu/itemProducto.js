@@ -65,7 +65,6 @@ export default class ItemProducto extends Component {
             disabled={this.state.open}
             primaryTogglesNestedList={true}
             className='editar_producto'
-            nestedLevel={0}
             hoverColor={'rgba(0,0,0,0)'}
             primaryText={
 
@@ -123,18 +122,21 @@ export default class ItemProducto extends Component {
             </div>
 
             :
+            <div className='vista_lista_productos'>
+                <div className="item_nombre">
+                  {this.props.value.nombre}
+                </div>
 
-            <span>
-              {this.props.value.nombre}
-              <div className="menu_producto" >
-                <div className="item_descripcion">
-                  {this.props.value.descripcion}
+                <div className='vista_descrip_precio'>
+                  <div className="item_descripcion">
+                    {this.props.value.descripcion}
+                  </div>
+                  <div className="item_precio">
+                    ${this.props.value.precio}
+                  </div>
                 </div>
-                <div className="item_precio">
-                  ${this.props.value.precio}
-                </div>
-              </div>
-            </span>
+
+            </div>
             }
 
           nestedItems={[
