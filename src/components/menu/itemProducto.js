@@ -14,7 +14,7 @@ export default class ItemProducto extends Component {
     this.state = {
       open: false,
       value: props.value,
-      editando: false,
+      editando: true,
     };
     this.gestionarApertura=this.gestionarApertura.bind(this)
   }
@@ -49,7 +49,6 @@ export default class ItemProducto extends Component {
 
   gestionarApertura = () =>{
     this.setState({open: !this.state.open})
-
    }
 
   render()
@@ -58,7 +57,7 @@ export default class ItemProducto extends Component {
       return(
         <div>
           <ListItem
-            initiallyOpen={this.state.open}
+            initiallyOpen={(this.props.value.nombre === "") ? this.state.open = true : '' }
             open={this.state.open}
             onNestedListToggle={this.gestionarApertura}
             secondaryTextLines={2}
@@ -88,6 +87,7 @@ export default class ItemProducto extends Component {
                 style={{color: '#888', fontSize: '14px' ,lineHeight: '20px'  }}
                 fullWidth={true}
                 hintText="descripcion.."
+                onKeyPress={this.gestionarEnter}
                 value={this.props.value.descripcion}
                 onChange={this.onGestionarEdicion}
                 multiLine={true}
@@ -95,9 +95,11 @@ export default class ItemProducto extends Component {
                 name='descripcion'
                 />
               </div>
-              <div className="item_editar_precio"> $
+              <div className="item_editar_precio">
                 <TextField
                 name="precio"
+                hintText="$"
+                onKeyPress={this.gestionarEnter}
                 value={this.props.value.precio}
                 onChange={this.onGestionarEdicion}
                 fullWidth={true}
@@ -111,9 +113,9 @@ export default class ItemProducto extends Component {
                   <ActionDelete/>
                   </IconButton>
               </div>
-              <div>
+              <div className="item_editar_disponibilidad">
                 <Toggle
-                   label="disponible"
+                   label="Disponible"
                    defaultToggled={this.props.value.disponibilidad}
                    name='disponibilidad'
                    onToggle={()=> this.onGestionarDisponibilidad(this.props.value.disponibilidad)}

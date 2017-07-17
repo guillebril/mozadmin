@@ -40,48 +40,75 @@
 
 .vista_descrip_precio{
   padding-top: 5px;
-  width: 275px;
+  width: 265px;
   display: flex;
   justify-content: space-between;
 }
 
 
+.editar_producto{
+  padding-right: 0px !important
+}
+
+
 .item_descripcion{
-  flex: 3;
+  flex: 5;
   font-size: 85%;
   color: #888 !important;
 
 }
 .item_precio {
   flex: 1;
+
+  padding-left: 10px;
   text-align: center;
-  align-self: right;
+  align-self: center;
   font-size: 17px;
 }
 
+
 .menu_editar_producto{
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .item_editar_nombre{
-  width: 80%;
+  flex: 1;
+  max-width: 70%;
+  flex-basis: 80%;
+
 }
 
 .item_editar_descripcion{
-  width: 80%;
+  flex: 1;
   color: #888 !important;
+  flex-basis: 75%;
   font-size: 80%;
 }
 
+
 .item_editar_precio{
-  width: 15%;
+  flex: 1;
+  flex-basis: 15%;
   padding-left: 12px;
-  align-self: flex-end;
+  padding-right: 5px;
   text-align: right;
 }
 
 .item_editar_precio input{
  text-align: center;
+}
+
+.item_eliminar_producto{
+  flex:1;
+  flex-basis: 16%
+}
+
+.item_editar_disponibilidad{
+  flex: 5;
+  padding-right: 15px;
+  padding-top: 10px;
+  max-width: 140px;
+  flex-basis: 30%;
 }
