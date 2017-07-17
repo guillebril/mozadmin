@@ -2,7 +2,7 @@ import React from 'react';
 import { SortableContainer} from 'react-sortable-hoc';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import CategoriaContenedor from './categoriaContenedor';
+import CategoriaContenedor from './HOC_categoriaContenedor';
 
 
 //Este compoenente genera la categoria

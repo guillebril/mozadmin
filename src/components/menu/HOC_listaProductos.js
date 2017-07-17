@@ -5,7 +5,7 @@ import Subheader from 'material-ui/Subheader';
 import FlatButton from 'material-ui/FlatButton';
 
 import TituloCategoria from './tituloCategoria';
-import ProductoContenedor from './productoContenedor'
+import ProductoContenedor from './HOC_productoContenedor'
 
 //Este compoenente genera la categoria
 const ListaProductos = SortableContainer(({ items, categoria ,nombreCategoria, onGestionarEdicion, onGestionarDisponibilidad , onGestionarEdicionCategoria, agregarProducto, onBorrar }) => {

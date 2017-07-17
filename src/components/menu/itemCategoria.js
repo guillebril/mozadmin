@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardText } from 'material-ui/Card';
 
 import base from '../../rebase';
-import ListaProductos from './listaProductos';
+import ListaProductos from './HOC_listaProductos';
 import ordenarPosicionObjetos from '../../helper/funcOrdenarPosicionObjetos';
 
 

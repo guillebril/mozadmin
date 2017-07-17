@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import ListaCategorias from './listaCategorias';
+import ListaCategorias from './HOC_listaCategorias';
 import base from '../../rebase';
 import ordenarPosicionObjetos from '../../helper/funcOrdenarPosicionObjetos';
 
