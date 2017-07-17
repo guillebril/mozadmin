@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import ListaCategorias from './listaCategorias';
 import base from '../../rebase';
+import ordenarPosicionObjetos from '../../helper/funcOrdenarPosicionObjetos';
 
 //Este componente maneja transacciones
 export default class Categorias extends Component {
@@ -39,26 +40,9 @@ export default class Categorias extends Component {
 
 //re-ordeno los objetos luego de desplazar un item.
   onSortEnd = ({ oldIndex, newIndex }) => {
-    const categorias = this.state.categorias
-    // pongo en la nueva pos al elemento que esta en la vieja
-    categorias[oldIndex].pos = 999
-
-    var i = 0
-    var posi = oldIndex
-    if(oldIndex > newIndex){
-      for (i; i < oldIndex - newIndex; i++) {
-      categorias[posi-1].pos = posi
-      posi--
-      }
-    }
-    else {
-      for (i ; i < newIndex - oldIndex; i++) {
-        categorias[posi+1].pos = posi
-        posi++
-      }
-    }
-    categorias[oldIndex].pos= newIndex
-    this.setState({categorias: categorias});
+    const categorias = this.state.categorias;
+    var categorias2 = ordenarPosicionObjetos(oldIndex,newIndex,categorias);
+    this.setState({categorias: categorias2});
   };
 
 //actualizo el objeto categorias cada vez que edito un elemento.

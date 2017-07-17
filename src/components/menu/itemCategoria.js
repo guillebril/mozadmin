@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Card, CardText } from 'material-ui/Card';
 
 import base from '../../rebase';
-import ListaProductos from './listaProductos'
+import ListaProductos from './listaProductos';
+import ordenarPosicionObjetos from '../../helper/funcOrdenarPosicionObjetos';
 
 
 //Este componente maneja transacciones
@@ -45,27 +46,8 @@ export default class ItemCategoria extends Component {
 //re-ordeno los objetos luego de desplazar un item.
   onSortEnd = ({ oldIndex, newIndex }) => {
     const items = this.state.items
-    // pongo en la nueva pos al elemento que esta en la vieja
-    items[oldIndex].pos = 999
-    var posi = oldIndex
-    var i = 0
-
-    if(oldIndex > newIndex){
-
-      for (i; i < oldIndex - newIndex; i++) {
-      items[posi-1].pos = posi
-      posi--
-      }
-    }
-    else {
-      for (i; i < newIndex - oldIndex; i++) {
-        items[posi+1].pos = posi
-        posi++
-      }
-    }
-    items[oldIndex].pos= newIndex
-
-    this.setState({items: items});
+    var items2 = ordenarPosicionObjetos(oldIndex,newIndex,items);
+    this.setState({items: items2});
   };
 
 //actualizo el objeto items cada vez que edito un elemento.
