@@ -1,9 +1,19 @@
+// Dependencias
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+// Routes
+
+import AppRoutes from './routes';
+
+// Assets
 import './index.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 ReactDOM.render(
-  <App/>, document.getElementById('root'));
+	<Router>
+		<AppRoutes/>
+  	</Router>,
+  	 document.getElementById('root'));

@@ -1,4 +1,3 @@
-import '../App.css';
 import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
 
