@@ -4,17 +4,19 @@ import { Route, Switch } from 'react-router-dom';
 
 // Componentes
 import App from './components/App';
+import Menu from './components/menu/categorias';
 import Mesas from './components/mesas';
 import Page404 from './components/page404';
 
-
+//todo lo que genere Route lo devuelve en el children del componente App (children es lo que contiene el componente)
+// HABRIA QUE CAMBIAR ./components/menu/categorias (ese archivo) por algun index o algo mas general y reacomodar eso
 const AppRoutes = () =>
-	<div>
-		<Switch>
-			<Route path="/app" component={App} />
-			<Route path="/mesas" component={Mesas} />
+	<App>
+		<Switch>			
+			<Route exact path="/mesas" component={Mesas} />
+			<Route exact path="/" component={Menu} />
 			<Route component={Page404} />
 		</Switch>
-	</div>
+	</App>
 
 export default AppRoutes;

@@ -14,7 +14,7 @@ class App extends Component {
     children: PropTypes.object.isRequired
   };
 
-
+//este children es el componente que genera el router de routes
   render() {
     const { children } = this.props;
 
@@ -22,7 +22,7 @@ class App extends Component {
       <MuiThemeProvider>
         <div className="App">
             <NavTop/>
-            <Contenedor body={children}/>
+            <Contenedor body={children} />
         </div>
       </MuiThemeProvider>
     );
