@@ -8,7 +8,6 @@ class Page404 extends Component
 			<div className="Page404">
 				<h1>Page404. </h1>
 				<h2>Guille, agregale un /app a la url para que te entre en el menu, y un /mesas para que entre a las mesas</h2>
-				<h2>Ya no hace falta el /app</h2>
 			</div>
 			);
 	}
