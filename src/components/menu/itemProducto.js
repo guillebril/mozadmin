@@ -53,11 +53,13 @@ export default class ItemProducto extends Component {
 
   render()
 
+
+
     {
       return(
         <div>
           <ListItem
-            initiallyOpen={(this.props.value.nombre === "") ? this.state.open = true : '' }
+            initiallyOpen={(this.props.value.nombre === "") ? this.state.open = true : false }
             open={this.state.open}
             onNestedListToggle={this.gestionarApertura}
             secondaryTextLines={2}
