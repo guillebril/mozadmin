@@ -15,5 +15,6 @@ injectTapEventPlugin();
 ReactDOM.render(
 	<Router>
 		<AppRoutes/>
+		
   	</Router>,
   	 document.getElementById('root'));
