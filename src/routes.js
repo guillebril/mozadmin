@@ -12,13 +12,11 @@ import Page404 from './components/page404';
 // HABRIA QUE CAMBIAR ./components/menu/categorias (ese archivo) por algun index o algo mas general y reacomodar eso
 const AppRoutes = () =>
 	<App>
-		<Switch>
+		<Switch>			
 			<Route exact path="/mesas" component={Mesas} />
-			<Route exact path="/" component={Menu} />
+			<Route exact path="/" component={Menu}/>
 			<Route component={Page404} />
 		</Switch>
 	</App>
-
-
 
 export default AppRoutes;
