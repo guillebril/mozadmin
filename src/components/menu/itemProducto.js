@@ -10,9 +10,10 @@ import Toggle from 'material-ui/Toggle';
 
 export default class ItemProducto extends Component {
   constructor(props) {
+
     super(props);
     this.state = {
-      open: false,
+      open: props.value.nombre === "",
       value: props.value,
       editando: true,
     };
@@ -59,7 +60,6 @@ export default class ItemProducto extends Component {
       return(
         <div>
           <ListItem
-            initiallyOpen={(this.props.value.nombre === "") ? this.state.open = true : false }
             open={this.state.open}
             onNestedListToggle={this.gestionarApertura}
             secondaryTextLines={2}

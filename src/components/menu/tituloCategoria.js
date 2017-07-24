@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
-import NavigationCheck from 'material-ui/svg-icons/navigation/check';
+import base from '../../rebase';
 
+import NavigationCheck from 'material-ui/svg-icons/navigation/check';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
@@ -17,17 +18,15 @@ export default class TituloCategoria extends Component {
       editandoCategoria: false,
       nombre: props.categoria.nombre,
     };
+    this.onBorrarCategoria=this.onBorrarCategoria.bind(this)
     this.onGestionarEdicionCategoria=this.onGestionarEdicionCategoria.bind(this)
   }
 
-
   onCambiarModoEdicion = () => {
-
     this.setState(
       {editandoCategoria : !this.state.editandoCategoria}
     )
   }
-
 
  onGestionarEdicionCategoria = (event) =>{
    this.props.onGestionarEdicionCategoria (
@@ -38,30 +37,35 @@ export default class TituloCategoria extends Component {
 
  }
 
+ onBorrarCategoria = () => {
+   const key = this.props.categoria.key
+   base.remove('restaurantes/oconnells/menu/' + key);
+}
+
+
+
+
+
   render() {
   return(
-    this.state.editandoCategoria ?
-
-
+    this.state.editandoCategoria
+    ?
   <div style={{display: 'flex',
     justifyContent: 'space-between'}}>
-
-    <TextField
-      name="TituloCategoria"
-      id="TituloCategoria"
-      hintText="Hint Text"
-      value={this.props.categoria.nombre}
-      onChange={this.onGestionarEdicionCategoria}
-      />
-    <IconButton
-        className='checkIcono'
-       tooltip="Guardar">
-          <NavigationCheck
-            onTouchTap={this.onCambiarModoEdicion}
-            />
-        </IconButton>
-
+        <TextField
+          name="TituloCategoria"
+          id="TituloCategoria"
+          hintText="Hint Text"
+          value={this.props.categoria.nombre}
+          onChange={this.onGestionarEdicionCategoria}
+          />
+      <IconButton
+          className='checkIcono'
+          tooltip="Guardar">
+          <NavigationCheck onTouchTap={this.onCambiarModoEdicion} />
+      </IconButton>
   </div>
+
   :
   <div style={{display: 'flex',
     justifyContent: 'space-between'}}>
@@ -72,15 +76,18 @@ export default class TituloCategoria extends Component {
        iconButtonElement={
          <IconButton>
            <MoreVertIcon/>
-         </IconButton>
-       }
+         </IconButton>}
        targetOrigin={{horizontal: 'right', vertical: 'top'}}
        anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
-     <MenuItem
-       onTouchTap={this.onCambiarModoEdicion}
-       primaryText="Cambiar Nombre"
-          />
-     <MenuItem primaryText="Eliminar" />
+
+       <MenuItem
+         onTouchTap={this.onCambiarModoEdicion}
+         primaryText="Cambiar Nombre"/>
+
+       <MenuItem
+         primaryText="Eliminar"
+         onTouchTap={this.onBorrarCategoria}/>
+
    </IconMenu>
   </div>
 

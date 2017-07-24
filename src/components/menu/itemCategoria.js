@@ -99,6 +99,7 @@ export default class ItemCategoria extends Component {
            onSortEnd={this.onSortEnd}
            onGestionarEdicion={this.onGestionarEdicion}
            onBorrar={this.onBorrar}
+           onBorrarCategoria={this.onBorrarCategoria}
            agregarProducto={this.agregarProducto}
            onGestionarDisponibilidad={this.onGestionarDisponibilidad}
            onGestionarEdicionCategoria={this.props.onGestionarEdicionCategoria}

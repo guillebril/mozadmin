@@ -6,7 +6,14 @@
 
 .contenedor {
   display: flex;
-  padding: 15px;
+  padding: 94px 15px 15px 15px;
+}
+
+.appbar{
+  position: fixed !important;
+}
+.appbar-boton{
+  color: '#fff';
 }
 
 /*========CATEGORIAS==============*/

@@ -8,13 +8,14 @@ import TituloCategoria from './tituloCategoria';
 import ProductoContenedor from './HOC_productoContenedor'
 
 //Este compoenente genera la categoria
-const ListaProductos = SortableContainer(({ items, categoria ,nombreCategoria, onGestionarEdicion, onGestionarDisponibilidad , onGestionarEdicionCategoria, agregarProducto, onBorrar }) => {
+const ListaProductos = SortableContainer(({ items, categoria ,nombreCategoria, onGestionarEdicion, onGestionarDisponibilidad , onGestionarEdicionCategoria, agregarProducto, onBorrar, onBorrarCategoria }) => {
 //Muestra la lista
   return(
     <List>
       <Subheader>
         <TituloCategoria
         categoria={categoria}
+        onBorrarCategoria={onBorrarCategoria}
         onGestionarEdicionCategoria={onGestionarEdicionCategoria}
         nombreCategoria={nombreCategoria}/>
       </Subheader>

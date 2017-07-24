@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import ListaCategorias from './HOC_listaCategorias';
 import base from '../../rebase';
 import ordenarPosicionObjetos from '../../helper/funcOrdenarPosicionObjetos';
@@ -32,7 +31,7 @@ export default class Categorias extends Component {
   agregarCategoria = () => {
     const nuevaPos = this.state.categorias.length
     base.push('restaurantes/oconnells/menu', {
-    data: {nombre: 'Nombre de la categoria',
+    data: {nombre: 'Nombre',
           disponible: true,
           pos: nuevaPos},
         });
@@ -68,12 +67,9 @@ export default class Categorias extends Component {
       this.setState({ categorias : categorias})
   }
 
-  onBorrarCategoria = (key) =>{
-     base.remove('restaurantes/oconnells/menu'+ key, function(err){
-     if(!err){
+  onBorrarCategoria = (key) => {
+     base.remove('restaurantes/oconnells/menu' + key)
 
-       }
-     });
    }
 
   render() {
