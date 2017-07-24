@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Categorias from './categorias';
 import PropTypes from 'prop-types';
 
 //Este compoenente contiene a la lista de categorias
