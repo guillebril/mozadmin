@@ -45,7 +45,8 @@ class ContenedorMesas extends Component
 		 agregarMesa =() => {
 			 base.push('restaurantes/oconnells/mesas', {
 				 data:{
-					 numero:"2"
+					 numero:"2",
+					 codigoMesa:"dgm92",
 				 },
 			 });
 

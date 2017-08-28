@@ -10,7 +10,22 @@ class contenidoModal extends Component
   constructor(props)
   {
     super(props);
+    this.state = {
+          value: '',
+        };
   }
+  handleChange = (event) => {
+        this.setState({
+          value: event.target.value,
+        });
+      };
+
+   handleClick = (str) => {
+      this.setState({
+        value:str,
+      });
+      console.log(str)
+    };
   GenerarCodigo = () =>{
     var text = "";
     var possible = "abcdefghijklmnopqrstuvwxyz";
@@ -19,6 +34,8 @@ class contenidoModal extends Component
     {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
+    this.setState({value:text});
+
     console.log(text);
   }
   render()
@@ -33,10 +50,12 @@ class contenidoModal extends Component
     return(
       <div>
         <TextField
-        name="txtCodigo"
-         hintText=""
-         floatingLabelText="Codigo Mesa"
-         multiLine={false}
+          name="txtCodigo"
+          value={this.state.value}
+          hintText=""
+          floatingLabelText="Codigo Mesa"
+          multiLine={false}
+          onChange={this.handleChange}
         />
         <RaisedButton label="Generar Codigo" primary={true}style={style} onTouchTap={this.GenerarCodigo} />
         <div>
