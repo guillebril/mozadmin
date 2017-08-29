@@ -14,25 +14,31 @@ class ContenedorMesas extends Component
 	{
 		super(props);
 		this.state = {mesas:[],
-		open:false}
+		open:false,
+		valorKeyMesaCreada:''}
 		this.agregarMesa = this.agregarMesa.bind(this);
 	}
   handleOpen = () => {
-    this.setState({open: true});
+
+		var valorTemp = this.agregarMesa();
+		this.setState({valorKeyMesaCreada: valorTemp});
+		this.setState({open: true});
+		console.log(valorTemp);
   };
 
   handleCloseCancelar = () => {
     this.setState({open: false});
+		base.remove('restaurantes/oconnells/mesas/'+this.state.valorKeyMesaCreada);
   };
 	handleCloseAceptar = () => {
     this.setState({open: false});
-		this.agregarMesa();
   };
+
 
 	//Uso re-base para sincronizar el estado del objeto mesas con la db
 	componentDidMount()
 	{
-		base.syncState('restaurantes/oconnells/mesas',
+		base.bindToState('restaurantes/oconnells/mesas',
 		{
 			context: this,
 			state: 'mesas',
@@ -43,13 +49,16 @@ class ContenedorMesas extends Component
 	}
 
 		 agregarMesa =() => {
-			 base.push('restaurantes/oconnells/mesas', {
+			var valorPush = base.push('restaurantes/oconnells/mesas', {
 				 data:{
 					 numero:"2",
 					 codigoMesa:"dgm92",
+					 total:'0',
+					 fechaHoraIngreso:'',
+					 estado:'en espera',
 				 },
 			 });
-
+			 return (valorPush.key)
 			 console.log("Mesa agregada");
 		 }
 
@@ -75,13 +84,14 @@ class ContenedorMesas extends Component
 					<RaisedButton label="Agregar Mesa" primary={true}
 					onTouchTap={this.handleOpen} />
 					<Dialog
-          title="Nueva cuenta"
-          actions={actions}
-          modal={false}
-          open={this.state.open}
-          onRequestClose={this.handleClose}
-        >
-				<ContenidoModal />
+	          title="Nueva cuenta"
+	          actions={actions}
+	          modal={false}
+	          open={this.state.open}
+	          onRequestClose={this.handleClose}
+						valorKeyMesa={this.state.valorKeyMesaCreada}
+        	>
+				<ContenidoModal valorKeyMesa={this.state.valorKeyMesaCreada} />
 				</Dialog>
 				</div>
 

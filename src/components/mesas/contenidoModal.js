@@ -1,9 +1,12 @@
 // Dependencias
 import React, {Component } from 'react';
+import base from '../../rebase';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Toggle from 'material-ui/Toggle';
 import ListaProductos from './listaProductos';
+import Time from 'react-time';
+import update from 'immutability-helper';
 
 class contenidoModal extends Component
 {
@@ -12,20 +15,31 @@ class contenidoModal extends Component
     super(props);
     this.state = {
           value: '',
+          datosMesa:'',
+          total:'',
         };
   }
-  handleChange = (event) => {
+  //Uso re-base para sincronizar el estado del objeto mesas con la db
+	componentDidMount()
+	{
+		base.syncState('restaurantes/oconnells/mesas/'+this.props.valorKeyMesa,
+		{
+			context: this,
+			state: 'datosMesa',
+			asArray: false
+		});
+	}
+  handleChangeCodigoMesa = (event) => {
         this.setState({
-          value: event.target.value,
+          datosMesa : {codigoMesa: event.target.value},
         });
       };
-
-   handleClick = (str) => {
-      this.setState({
-        value:str,
-      });
-      console.log(str)
-    };
+  handleChangeNumero = (event) => {
+        this.setState({
+          datosMesa : {numero: event.target.value},
+        });
+      };
+  
   GenerarCodigo = () =>{
     var text = "";
     var possible = "abcdefghijklmnopqrstuvwxyz";
@@ -34,38 +48,47 @@ class contenidoModal extends Component
     {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
-    this.setState({value:text});
-
-    console.log(text);
+      this.setState({
+          datosMesa : {codigoMesa: text},
+       });
   }
   render()
 	{
+    let now = new Date();
+    var TotalText="Total: $"+ this.state.datosMesa.total;
     const style = {
     margin: 12,
 
     toggle: {
        marginBottom: 16,
+       maxWidth:120,
      },
     };
+
     return(
       <div>
-        <TextField
-          name="txtCodigo"
-          value={this.state.value}
-          hintText=""
-          floatingLabelText="Codigo Mesa"
-          multiLine={false}
-          onChange={this.handleChange}
-        />
-        <RaisedButton label="Generar Codigo" primary={true}style={style} onTouchTap={this.GenerarCodigo} />
+
         <div>
         Esperando mozo
         </div>
+        <TextField
+          name="txtCodigo"
+          value={this.state.datosMesa.codigoMesa}
+          hintText=""
+          floatingLabelText="Codigo Mesa"
+          multiLine={false}
+          onChange={this.handleChangeCodigoMesa}
+        />
+        <RaisedButton label="Generar Codigo" primary={true}style={style} onTouchTap={this.GenerarCodigo} />
+
         <br/>
         <TextField
+        name="txtNumero"
+         value={this.state.datosMesa.numero}
          hintText=""
          floatingLabelText="Número mesa"
          multiLine={false}
+         onChange={this.handleChangeNumero}
         />
         <br/>
         <Toggle
@@ -73,9 +96,12 @@ class contenidoModal extends Component
           defaultToggled={true}
           style={style.toggle}
         />
+        {TotalText}
         <br/>
         <ListaProductos/>
-
+        <div>
+        <Time value={now} format="HH:MM" />
+        </div>
       </div>
     )
   }
