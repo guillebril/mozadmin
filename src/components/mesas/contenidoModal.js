@@ -39,7 +39,7 @@ class contenidoModal extends Component
           datosMesa : {numero: event.target.value},
         });
       };
-  
+
   GenerarCodigo = () =>{
     var text = "";
     var possible = "abcdefghijklmnopqrstuvwxyz";
@@ -64,6 +64,7 @@ class contenidoModal extends Component
        maxWidth:120,
      },
     };
+    
 
     return(
       <div>

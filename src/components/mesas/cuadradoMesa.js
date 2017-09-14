@@ -10,12 +10,17 @@ class CuadradoMesa extends Component
 	constructor(props)
 	{
 		super(props)
-		this.state = { open:false};
+		this.state = {
+			open:false,
+		valorKeyMesaAbierta:''};
+
 	}
 
-	gestionarAperturaModalMesa = () =>
+	gestionarAperturaModalMesa = (keyMesa) =>
 	{
 		console.log("Apertura");
+		console.log(this.props.mesa.key);
+		this.setState({valorKeyMesaAbierta:this.props.mesa.key});
 		this.setState({open:true});
 	}
 
@@ -27,7 +32,14 @@ class CuadradoMesa extends Component
 
 	render()
 	{
-
+		const actions = [
+	      <FlatButton
+	        label="Cerrar"
+	        primary={true}
+	        keyboardFocused={true}
+	        onTouchTap={this.gestionarCerrarModalMesa}
+	      />,
+	    ];
 		return (
 			<Paper  zDepth={2}   style={{minWidth:"100px" ,cursor:"pointer", minHeight:"100px" , backgroundColor:"#ecf0f1", display:"inherit", alignItems:"center", margin:"15px"}}
 			onTouchTap={this.gestionarAperturaModalMesa}
@@ -37,12 +49,13 @@ class CuadradoMesa extends Component
 				</p>
 
 				<Dialog
-		          title="Dialog With Actions"
+							actions={actions}
+		          title="Mesa"
 		          modal={false}
 		          open={this.state.open}
 		          onRequestClose={this.gestionarCerrarModalMesa}
 		        >
-		          The actions in this window were passed in as an array of React objects.
+							<ContenidoModal valorKeyMesa={this.state.valorKeyMesaAbierta} />
 		     </Dialog>
 			</Paper>
 		);
