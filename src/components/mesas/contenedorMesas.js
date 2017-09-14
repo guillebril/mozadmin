@@ -65,14 +65,19 @@ class ContenedorMesas extends Component
 
 	render()
 	{
+		var mesasActivas = Object.values(this.state.mesas).map(( mesa, index ) => {
+			return ( <CuadradoMesa key={mesa.key} mesa={mesa}/> )
+		})
+
+
 		const actions = [
 	      <FlatButton
-	        label="Cancelar"
+	        label="Eliminar"
 	        primary={true}
 	        onTouchTap={this.handleCloseCancelar}
 	      />,
 	      <FlatButton
-	        label="Aceptar"
+	        label="Cerrar"
 	        primary={true}
 	        keyboardFocused={true}
 	        onTouchTap={this.handleCloseAceptar}
@@ -96,11 +101,8 @@ class ContenedorMesas extends Component
 				</div>
 
 				<div style={{display:"flex",  flexWrap:"wrap"}}>
-					<CuadradoMesa />
-					<CuadradoMesa />
-					<CuadradoMesa />
-					<CuadradoMesa />
-					<CuadradoMesa />
+				{mesasActivas}
+
 				</div>
 			</div>
 		);

@@ -1,9 +1,9 @@
 import React, {Component } from 'react';
 import {  ListItem } from 'material-ui/List';
 import TextField from 'material-ui/TextField';
-import IconButton from 'material-ui/IconButton';
-import ActionDelete from 'material-ui/svg-icons/action/delete';
-import Toggle from 'material-ui/Toggle';
+//import IconButton from 'material-ui/IconButton';
+//import ActionDelete from 'material-ui/svg-icons/action/delete';
+//import Toggle from 'material-ui/Toggle';
 
 class Producto extends Component
 {
