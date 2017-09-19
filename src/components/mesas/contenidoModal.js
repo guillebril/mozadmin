@@ -64,7 +64,7 @@ class contenidoModal extends Component
        maxWidth:120,
      },
     };
-    
+
 
     return(
       <div>
@@ -99,7 +99,9 @@ class contenidoModal extends Component
         />
         {TotalText}
         <br/>
-        <ListaProductos/>
+        <ListaProductos
+            keyMesa={this.props.valorKeyMesa}
+        />
         <div>
         <Time value={now} format="HH:MM" />
         </div>

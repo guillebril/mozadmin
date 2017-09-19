@@ -53,15 +53,15 @@ class Producto extends Component
         :
         <div className='vista_lista_productos'>
             <div className="item_nombre">
-              Hamburguesa completa
+              {this.props.pedido.producto}
             </div>
 
             <div className='vista_descrip_precio'>
               <div className="item_descripcion">
-                Sin mayonesa
+                {this.props.pedido.descripcion}
               </div>
               <div className="item_precio">
-                $45
+                ${this.props.pedido.total}
               </div>
             </div>
 
