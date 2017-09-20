@@ -28,8 +28,7 @@ componentDidMount()
   render()
   {
     //revisar este mapeo que esta mapeando mal
-    console.log("State pedidos en render listaProductos:"+ this.state.pedidos);
-    var listaPedidos = Object.values(this.state.pedidos).map(( pedido, index ) => {
+  var listaPedidos = Object.values(this.state.pedidos).map(( pedido, index ) => {
       return (
         //Revisar si esta bien esto de los key o va en un solo lado
         <ListItem key={pedido.key}>

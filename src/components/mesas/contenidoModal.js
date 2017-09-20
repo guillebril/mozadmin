@@ -40,6 +40,7 @@ class contenidoModal extends Component
         });
       };
 
+
   GenerarCodigo = () =>{
     var text = "";
     var possible = "abcdefghijklmnopqrstuvwxyz";
@@ -92,7 +93,7 @@ class contenidoModal extends Component
          onChange={this.handleChangeNumero}
         />
         <br/>
-        <Toggle
+          <Toggle
           label="Estado"
           defaultToggled={true}
           style={style.toggle}

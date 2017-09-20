@@ -1,6 +1,7 @@
 import React, {Component } from 'react';
 import {  ListItem } from 'material-ui/List';
 import TextField from 'material-ui/TextField';
+import Time from 'react-time';
 //import IconButton from 'material-ui/IconButton';
 //import ActionDelete from 'material-ui/svg-icons/action/delete';
 //import Toggle from 'material-ui/Toggle';
@@ -27,9 +28,15 @@ class Producto extends Component
     div: {
        marginBottom: 16,
      },
+     vista_lista_productos:{}
     };
     return(
-      <div style={{display:"flex"}}>
+      <div style={{display:"flex",alignItems:"baseline"}}>
+
+      <div className="horario_producto_pedido">
+        <Time value={this.props.pedido.horario} format="HH:MM" />
+      </div>
+
       <ListItem
         open={this.state.open}
         onNestedListToggle={this.gestionarApertura}
@@ -51,19 +58,26 @@ class Producto extends Component
         </div>
 
         :
-        <div className='vista_lista_productos'>
+        <div className='vista_rectangulo_producto'>
+        <div className='vista_nombre_comentario' >
             <div className="item_nombre">
               {this.props.pedido.producto}
             </div>
 
             <div className='vista_descrip_precio'>
-              <div className="item_descripcion">
-                {this.props.pedido.descripcion}
-              </div>
-              <div className="item_precio">
-                ${this.props.pedido.total}
+              <div className="item_comentario">
+                {this.props.pedido.comentarios}
               </div>
             </div>
+          </div>
+        <div className='vista_cantidad_precio' >
+            <div className="item_cantidad">
+            Cant: {this.props.pedido.cantidad}
+            </div>
+            <div className="item_precio">
+              ${this.props.pedido.total}
+            </div>
+        </div>
 
         </div>
         }
@@ -77,6 +91,9 @@ class Producto extends Component
       ]}>
         </ListItem>
 
+        <div className="aceptar_cancelar_pedido">
+
+        </div>
       </div>
     )
   }

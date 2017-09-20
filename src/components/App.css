@@ -64,6 +64,7 @@
   color: #888 !important;
 
 }
+
 .item_precio {
   flex: 1;
 
@@ -118,4 +119,30 @@
   padding-top: 10px;
   max-width: 140px;
   flex-basis: 30%;
+}
+
+/*========PRODUCTO ADMIN==============*/
+
+.item_comentario{
+  flex: 5;
+  font-size: 85%;
+  color: #888 !important;
+
+}
+.horario_producto_pedido{
+  display:block;
+  color: #888 !important;
+
+}
+.vista_rectangulo_producto{
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.item_cantidad{
+    font-size: 85%;
+    color: #888 !important;
+    padding:3px
 }

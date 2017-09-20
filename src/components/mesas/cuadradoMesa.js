@@ -18,15 +18,12 @@ class CuadradoMesa extends Component
 
 	gestionarAperturaModalMesa = (keyMesa) =>
 	{
-		console.log("Apertura");
-		console.log(this.props.mesa.key);
 		this.setState({valorKeyMesaAbierta:this.props.mesa.key});
 		this.setState({open:true});
 	}
 
 	gestionarCerrarModalMesa = () =>
 	{
-		console.log("Cerrado");
 		this.setState({open:false});
 	}
 
@@ -54,7 +51,8 @@ class CuadradoMesa extends Component
 		          modal={false}
 		          open={this.state.open}
 		          onRequestClose={this.gestionarCerrarModalMesa}
-		        >
+							autoScrollBodyContent={true}
+						>
 							<ContenidoModal valorKeyMesa={this.state.valorKeyMesaAbierta} />
 		     </Dialog>
 			</Paper>
