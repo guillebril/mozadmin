@@ -1,8 +1,9 @@
 import React, {Component } from 'react';
+import base from '../../rebase';
 import {  ListItem } from 'material-ui/List';
 import TextField from 'material-ui/TextField';
 import Time from 'react-time';
-//import IconButton from 'material-ui/IconButton';
+import RaisedButton from 'material-ui/RaisedButton';
 //import ActionDelete from 'material-ui/svg-icons/action/delete';
 //import Toggle from 'material-ui/Toggle';
 
@@ -17,9 +18,17 @@ class Producto extends Component
       editando: true,
     };
     }
+
     gestionarApertura = () =>{
       this.setState({open: !this.state.open})
      }
+
+    AceptarPedido = () =>{
+      console.log("Acepto pedido");
+    }
+    CancelarPedido = () =>{
+     console.log("Cancelado");
+    }
   render()
   {
     const style = {
@@ -92,7 +101,15 @@ class Producto extends Component
         </ListItem>
 
         <div className="aceptar_cancelar_pedido">
-
+          <div className="aceptar">
+          <RaisedButton label="Aceptar"
+          primary={true}
+          onTouchTap={this.AceptarPedido} />
+          </div>
+          <div className="cancelar">
+          <RaisedButton label="Cancelar" primary={true}
+          onTouchTap={this.CancelarPedido} />
+          </div>
         </div>
       </div>
     )

@@ -59,7 +59,6 @@ class ContenedorMesas extends Component
 				 },
 			 });
 			 return (valorPush.key)
-			 console.log("Mesa agregada");
 		 }
 
 

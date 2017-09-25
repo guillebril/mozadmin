@@ -6,7 +6,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Toggle from 'material-ui/Toggle';
 import ListaProductos from './listaProductos';
 import Time from 'react-time';
-import update from 'immutability-helper';
 
 class contenidoModal extends Component
 {

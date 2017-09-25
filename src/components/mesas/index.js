@@ -1,6 +1,5 @@
 // Dependencias
 import React, {Component } from 'react';
-import base from '../../rebase';
 
 import ContenedorMesas from './contenedorMesas';
 

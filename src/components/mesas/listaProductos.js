@@ -15,7 +15,6 @@ class ListaProductos extends Component
 //Uso re-base para sincronizar el estado del objeto mesas con la db
 componentDidMount()
 {
-
   base.bindToState('restaurantes/oconnells/mesas/'+this.props.keyMesa+'/pedidos',
   {
     context: this,
@@ -32,9 +31,11 @@ componentDidMount()
       return (
         //Revisar si esta bien esto de los key o va en un solo lado
         <ListItem key={pedido.key}>
-            <Producto keyProducto={pedido.key} pedido={pedido}/>
+            <Producto
+            keyProducto={pedido.key}
+            pedido={pedido}
+            />
           </ListItem>
-
           )
     })
     return(
