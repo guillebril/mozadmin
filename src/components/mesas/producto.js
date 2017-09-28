@@ -38,10 +38,21 @@ class Producto extends Component
     div: {
        marginBottom: 16,
      },
-     vista_lista_productos:{}
-    };
+     vista_lista_productos:{},
+   };
+
+   var estiloInfoProd ;
+    if(this.props.pedido.estado==='cancelado')
+    {
+      estiloInfoProd ={display:"flex",alignItems:"baseline",textDecorationLine:"line-through"};
+    }
+    else
+    {
+      estiloInfoProd = {display:"flex",alignItems:"baseline"};
+    }
+    
     return(
-      <div style={{display:"flex",alignItems:"baseline"}}>
+      <div style={estiloInfoProd}>
 
       <div className="horario_producto_pedido">
         <Time value={this.props.pedido.horario} format="HH:MM" />
