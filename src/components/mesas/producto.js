@@ -24,10 +24,11 @@ class Producto extends Component
      }
 
     AceptarPedido = () =>{
-      console.log("Acepto pedido");
+      this.props.aceptarProducto(this.props.pedido.key);
     }
+
     CancelarPedido = () =>{
-     console.log("Cancelado");
+    this.props.cancelarProducto(this.props.pedido.key);
     }
   render()
   {

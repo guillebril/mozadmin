@@ -11,17 +11,28 @@ class ListaProductos extends Component
     super(props);
     this.state = {pedidos:[]};
   }
+
+  aceptarProducto(keyProducto)
+  {
+    this.setState({pedidos :{[keyProducto] : {estado : 'aceptado'}}});
+  }
+  cancelarProducto(keyProducto)
+  {
+    this.setState({pedidos :{[keyProducto] : {estado : 'cancelado'}}});
+  }
 //falta sincronizar con base de datos para obtener los pedidos, osea pararse arriba
 //Uso re-base para sincronizar el estado del objeto mesas con la db
 componentDidMount()
 {
-  base.bindToState('restaurantes/oconnells/mesas/'+this.props.keyMesa+'/pedidos',
+  base.syncState('restaurantes/oconnells/mesas/'+this.props.keyMesa+'/pedidos',
   {
+    //cambien el bindToState por syncState
     context: this,
     state: 'pedidos',
     queries: {orderByChild: 'pos'},
     keepKeys: true,
     asArray: true
+    //Ojo que lo cambie al asArray de true a false para ver si puedo encontrar el key del pedido y no tenerlo en un array
   });
 }
   render()
@@ -32,6 +43,8 @@ componentDidMount()
         //Revisar si esta bien esto de los key o va en un solo lado
         <ListItem key={pedido.key}>
             <Producto
+            aceptarProducto={this.aceptarProducto.bind(this)}
+            cancelarProducto={this.cancelarProducto.bind(this)}
             keyProducto={pedido.key}
             pedido={pedido}
             />
