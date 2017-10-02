@@ -1,0 +1,5 @@
+Esta mal la lista de pedidos a clasificar y demas.
+Hay que ver como separarlo bien y hacer:
+  -Una interfaz única para las 3 listas de productos: en contenidoModal, y las 2 listas generales.
+  -Diferenciar los constructores para que diferencien las "lecturas de productos"(osea una sea lista general, otra los de una mesa, etc)
+  -Ver como cambiar el css entre ellos tmb  

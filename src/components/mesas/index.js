@@ -2,6 +2,7 @@
 import React, {Component } from 'react';
 
 import ContenedorMesas from './contenedorMesas';
+import ListaPedidosAClasificar from './listaPedidosAClasificar';
 
 class Mesas extends Component
 {
@@ -12,8 +13,12 @@ class Mesas extends Component
 
 	render() {
 		return (
-					<ContenedorMesas
-					 />
+			<div style={{display:"flex",alignItems:"baseline"}}>
+				<div style={{display:"flex",flexDirection: "column", alignItems:"baseline"}}>
+									<ListaPedidosAClasificar />
+				</div>
+				<ContenedorMesas />
+			</div>
 				);
 	}
 }
