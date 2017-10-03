@@ -50,7 +50,7 @@ class Producto extends Component
     {
       estiloInfoProd = {display:"flex",alignItems:"baseline"};
     }
-    
+
     return(
       <div style={estiloInfoProd}>
 
@@ -69,37 +69,48 @@ class Producto extends Component
 
         this.state.open ?
 
-        <div className="menu_editar_producto">
-          <div className="item_editar_nombre">
-            <TextField
-            hintText="Producto"
-            fullWidth={true}
-            name='nombre'/>
+        <div className='menu_editar_producto'>
+          <div className='vista_info_productoPedido' >
+              <div className="item_nombre">
+                {this.props.pedido.producto}
+              </div>
+              <div className="item_comentario">
+                Cantidad: {this.props.pedido.cantidad}
+              </div>
+              <div className="item_comentario">
+                Descripción: {this.props.pedido.descripcion}
+              </div>
+              <div className="item_comentario">
+                Comentario: {this.props.pedido.comentarios}
+              </div>
+              <div className="item_comentario">
+                Estado: {this.props.pedido.estado}
+              </div>
+          </div>
+          <div className='vista_cantidad_precio' >
+              <div className="item_precio">
+                ${this.props.pedido.total}
+              </div>
           </div>
         </div>
 
         :
         <div className='vista_rectangulo_producto'>
-        <div className='vista_nombre_comentario' >
-            <div className="item_nombre">
-              {this.props.pedido.producto}
-            </div>
-
-            <div className='vista_descrip_precio'>
-              <div className="item_comentario">
-                {this.props.pedido.comentarios}
+          <div className='vista_nombre_comentario' >
+              <div className="item_nombre">
+                {this.props.pedido.cantidad}  {this.props.pedido.producto}
               </div>
-            </div>
+              <div className='vista_descrip_precio'>
+                <div className="item_comentario">
+                  {this.props.pedido.comentarios}
+                </div>
+              </div>
           </div>
-        <div className='vista_cantidad_precio' >
-            <div className="item_cantidad">
-            Cant: {this.props.pedido.cantidad}
-            </div>
-            <div className="item_precio">
-              ${this.props.pedido.total}
-            </div>
-        </div>
-
+          <div className='vista_cantidad_precio' >
+              <div className="item_precio">
+                ${this.props.pedido.total}
+              </div>
+          </div>
         </div>
         }
 

@@ -54,7 +54,8 @@
 
 
 .editar_producto{
-  padding-right: 0px !important
+  padding-right: 0px
+  // saque el \!important porque me pisaba cuando abria el nested item
 }
 
 
@@ -145,4 +146,9 @@
     font-size: 85%;
     color: #888 !important;
     padding:3px
+}
+.vista_info_productoPedido
+{
+  display: flex;
+  flex-direction: column;
 }
