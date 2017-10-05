@@ -28,28 +28,35 @@ class Producto extends Component
     }
 
     CancelarPedido = () =>{
-    this.props.cancelarProducto(this.props.pedido.key);
+      this.props.cancelarProducto(this.props.pedido.key);
     }
+
+    onGestionarEdicion = (nuevo) =>{
+      console.log("entro en producto onGestionarEdicion"+this.props.pedido.key+nuevo.target.name + nuevo.target.value);
+      this.props.onGestionarEdicion(this.props.pedido.key,nuevo.target.name,nuevo.target.value);
+    }
+
+
   render()
   {
     const style = {
-    margin: 12,
+        margin: 12,
 
-    div: {
-       marginBottom: 16,
-     },
-     vista_lista_productos:{},
-   };
+        div: {
+           marginBottom: 16,
+         },
+         vista_lista_productos:{},
+       };
 
    var estiloInfoProd ;
     if(this.props.pedido.estado==='cancelado')
-    {
-      estiloInfoProd ={display:"flex",alignItems:"baseline",textDecorationLine:"line-through"};
-    }
-    else
-    {
-      estiloInfoProd = {display:"flex",alignItems:"baseline"};
-    }
+      {
+        estiloInfoProd ={display:"flex",alignItems:"baseline",textDecorationLine:"line-through"};
+      }
+      else
+      {
+        estiloInfoProd = {display:"flex",alignItems:"baseline"};
+      }
 
     return(
       <div style={estiloInfoProd}>
@@ -75,7 +82,13 @@ class Producto extends Component
                 {this.props.pedido.producto}
               </div>
               <div className="item_comentario">
-                Cantidad: {this.props.pedido.cantidad}
+                Cantidad:  <TextField
+                hintText="Cantidad"
+                autoFocus
+                fullWidth={true}
+                value={this.props.pedido.cantidad}
+                onChange={this.onGestionarEdicion}
+                name='cantidad'/>
               </div>
               <div className="item_comentario">
                 Descripción: {this.props.pedido.descripcion}

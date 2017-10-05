@@ -27,6 +27,12 @@ class ListaProductos extends Component
     //this.sumarTotales();
   }
 
+  onGestionarEdicionProducto(keyProducto,campo,valor)
+  {
+    var newState = {}
+    newState[campo]= valor;
+    this.setState({pedidos :{[keyProducto] :newState}});
+  }
   sumarTotales()
   {
     var totalPedidos = 0;
@@ -66,6 +72,8 @@ componentDidMount()
             <Producto
             aceptarProducto={this.aceptarProducto.bind(this)}
             cancelarProducto={this.cancelarProducto.bind(this)}
+            onGestionarEdicion={this.onGestionarEdicionProducto.bind(this)}
+
             keyProducto={pedido.key}
             pedido={pedido}
             />
