@@ -34,6 +34,7 @@ class Producto extends Component
     onGestionarEdicion = (nuevo) =>{
       console.log("entro en producto onGestionarEdicion"+this.props.pedido.key+nuevo.target.name + nuevo.target.value);
       this.props.onGestionarEdicion(this.props.pedido.key,nuevo.target.name,nuevo.target.value);
+      //Agregar un if y averiguar si cambio la cantidad, y recalcular el precio total
     }
 
 
@@ -94,8 +95,14 @@ class Producto extends Component
                 Descripción: {this.props.pedido.descripcion}
               </div>
               <div className="item_comentario">
-                Comentario: {this.props.pedido.comentarios}
-              </div>
+                Comentario:
+                <TextField
+                hintText="Comentario"
+                autoFocus
+                fullWidth={true}
+                value={this.props.pedido.comentarios}
+                onChange={this.onGestionarEdicion}
+                name='comentarios'/>               </div>
               <div className="item_comentario">
                 Estado: {this.props.pedido.estado}
               </div>
