@@ -59,9 +59,10 @@ componentDidMount()
   render()
   {
     //revisar este mapeo que esta mapeando mal
-  var listaPedidos = Object.values(this.state.pedidos).map(( pedido, index ) => {
+  var listaPedidosNuevos = Object.values(this.state.pedidos).map(( pedido, index ) => {
+      if(pedido.estado=="Pedido"){
       return (
-        <ListItem 
+        <ListItem
         className="ListaPedidosNuevos"
         key={pedido.key}>
             <Producto
@@ -72,11 +73,33 @@ componentDidMount()
             />
           </ListItem>
           )
+        }
     })
+    var listaPedidosViejos = Object.values(this.state.pedidos).map(( pedido, index ) => {
+        if(pedido.estado!="Pedido"){
+        return (
+          <ListItem
+          className="ListaPedidosNuevos"
+          key={pedido.key}>
+              <Producto
+              aceptarProducto={this.aceptarProducto.bind(this)}
+              cancelarProducto={this.cancelarProducto.bind(this)}
+              keyProducto={pedido.key}
+              pedido={pedido}
+              />
+            </ListItem>
+            )
+          }
+      })
+
+      //hacer scrollable la lista de abajo
     return(
     <List>
+      <h2>Nuevos pedidos sin revisar</h2>
+      {listaPedidosNuevos}
       <Divider />
-      {listaPedidos}
+      <h2>Pedidos revisados</h2>
+      {listaPedidosViejos}
       <Divider />
     </List>
     )
