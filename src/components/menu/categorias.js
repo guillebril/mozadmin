@@ -31,9 +31,12 @@ export default class Categorias extends Component {
   agregarCategoria = () => {
     const nuevaPos = this.state.categorias.length
     base.push('restaurantes/oconnells/menu', {
-    data: {nombre: 'Nombre',
-          disponible: true,
-          pos: nuevaPos},
+    data: {
+        nombre: 'Nombre',
+        //revisar el valor de tipoCategoria si se cambia, verificar en el codigo que se necesita correlatividad de nombres en otro lado
+        tipoCategoria: "Comidas",
+        disponible: true,
+        pos: nuevaPos},
         });
   }
 
@@ -46,18 +49,31 @@ export default class Categorias extends Component {
 
 //actualizo el objeto categorias cada vez que edito un elemento.
   onGestionarEdicionCategoria = (inicial, nuevo, posicion, elemento) => {
-
-    console.log(elemento)
     const categorias = this.state.categorias;
     switch (elemento) {
       case 'TituloCategoria':
         categorias[posicion].nombre = nuevo;
           break;
 
+      case 'TipoCategoria':
+        if(categorias[posicion].tipoCategoria == "Bebidas")
+        {
+          categorias[posicion].tipoCategoria = "Comidas";
+        }
+        else {if (categorias[posicion].tipoCategoria == "Comidas")
+                {
+                  categorias[posicion].tipoCategoria = "Bebidas";
+                }
+                else {
+                  {
+                    console.log("Error tipo categoria");
+                  }
+                }
+              }
+
       default:
-
+      
     }
-
     this.setState({ categorias : categorias})
   };
 

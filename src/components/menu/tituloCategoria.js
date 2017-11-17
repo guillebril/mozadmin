@@ -16,8 +16,11 @@ export default class TituloCategoria extends Component {
     super(props);
     this.state = {
       editandoCategoria: false,
+      editandoTipoCategoria: false,
       nombre: props.categoria.nombre,
+      tipoCategoria: props.categoria.tipoCategoria,
     };
+
     this.onBorrarCategoria=this.onBorrarCategoria.bind(this)
     this.onGestionarEdicionCategoria=this.onGestionarEdicionCategoria.bind(this)
   }
@@ -42,6 +45,15 @@ export default class TituloCategoria extends Component {
    base.remove('restaurantes/oconnells/menu/' + key);
 }
 
+  onCambiarTipoCategoria = (event) =>{
+    //Forzamos el event.target.name porque no generamos el evento desde un textbox sino un span
+    event.target.name="TipoCategoria";
+    this.props.onGestionarEdicionCategoria(
+      this.props.categoria.tipoCategoria,
+      event.target.value,
+      this.props.categoria.pos,
+       event.target.name)
+  }
 
 
 
@@ -72,6 +84,9 @@ export default class TituloCategoria extends Component {
     <span>
       {this.props.categoria.nombre}
     </span>
+    <span>
+      ({this.props.categoria.tipoCategoria})
+    </span>
     <IconMenu
        iconButtonElement={
          <IconButton>
@@ -85,8 +100,14 @@ export default class TituloCategoria extends Component {
          primaryText="Cambiar Nombre"/>
 
        <MenuItem
+         primaryText="Bebida/Comida"
+         onTouchTap={this.onCambiarTipoCategoria}/>
+
+       <MenuItem
          primaryText="Eliminar"
          onTouchTap={this.onBorrarCategoria}/>
+
+
 
    </IconMenu>
   </div>
