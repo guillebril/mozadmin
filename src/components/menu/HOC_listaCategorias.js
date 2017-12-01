@@ -14,7 +14,7 @@ const ListaCategorias = SortableContainer(({ categorias, onGestionarEdicionCateg
         <Button
           raised
 
-          style={{float: 'left', display: 'block', marginLeft: '15px'}}
+          style={{float: 'left', display: 'block', marginLeft: '15px', marginTop: '20px',}}
           onTouchTap={agregarCategoria}
 
         >Agregar Categoria</Button>
