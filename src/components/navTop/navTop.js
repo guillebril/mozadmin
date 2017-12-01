@@ -1,8 +1,11 @@
 // Dependencias
 import React, { Component } from 'react';
 import AppBar  from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+
 import { Link } from 'react-router-dom';
-import FlatButton from 'material-ui/FlatButton';
+import Button from 'material-ui/Button';
 
 
 // Assets
@@ -14,26 +17,26 @@ export default class NavTop extends Component {
     return(
       <div className="rootcont" >
 
-			  <AppBar
-        title="MozApp"
-				className='appbar'
-				iconElementRight={
-					<div style={{paddingTop: '8px' }}>
-					<Link  to='/'><FlatButton
-					labelStyle={{color: '#fff'}}
-					label="Mi Menu" /></Link>
+
+        <AppBar position="static">
+
+          <Toolbar>
+            <Typography type="title"  style={{flex: 1}} color="inherit">
+              MozApp
+            </Typography>
+            <Link  to='/'>
+              <Button color="contrast" > Mi Menu</Button>
+            </Link>
 
 
-				<Link
+            <Link to='/mesas'>
+              <Button color="contrast" > Mesas</Button>
+            </Link>
+          </Toolbar>
 
-				to='/mesas'><FlatButton
-				labelStyle={{color: '#fff'}}
-				label='Mesas'
-						 /> </Link>
-					</div>
-				}
+        </AppBar>
 
-			/>
+
       </div>
 
     );

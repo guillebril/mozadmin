@@ -2,10 +2,9 @@
 import React, {Component } from 'react';
 import base from '../../rebase';
 import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import Toggle from 'material-ui/Toggle';
+import Button from 'material-ui/Button';
+import Switch from 'material-ui/Switch';
 import ListaProductos from './listaProductos';
-import Time from 'react-time';
 
 class contenidoModal extends Component
 {
@@ -54,7 +53,6 @@ class contenidoModal extends Component
   }
   render()
 	{
-    let now = new Date();
     var TotalText="Total: $"+ this.state.datosMesa.total;
     const style = {
     margin: 12,
@@ -70,41 +68,34 @@ class contenidoModal extends Component
       <div>
 
         <div>
-        Esperando mozo
+          Esperando mozo
         </div>
         <TextField
           name="txtCodigo"
           value={this.state.datosMesa.codigoMesa}
-          hintText=""
-          floatingLabelText="Codigo Mesa"
-          multiLine={false}
           onChange={this.handleChangeCodigoMesa}
         />
-        <RaisedButton label="Generar Codigo" primary={true}style={style} onTouchTap={this.GenerarCodigo} />
+        <Button style={style} raised onTouchTap={this.GenerarCodigo} > Generar Codigo
+        </Button>
 
         <br/>
         <TextField
-        name="txtNumero"
-         value={this.state.datosMesa.numero}
-         hintText=""
-         floatingLabelText="Número mesa"
-         multiLine={false}
-         onChange={this.handleChangeNumero}
+          name="txtNumero"
+          value={this.state.datosMesa.numero}
+
+          onChange={this.handleChangeNumero}
         />
         <br/>
-          <Toggle
+        <Switch
           label="Estado"
-          defaultToggled={true}
-          style={style.toggle}
+          checked={true}
         />
         {TotalText}
         <br/>
         <ListaProductos
-            keyMesa={this.props.valorKeyMesa}
+          keyMesa={this.props.valorKeyMesa}
         />
-        <div>
-        <Time value={now} format="HH:MM" />
-        </div>
+
       </div>
     )
   }

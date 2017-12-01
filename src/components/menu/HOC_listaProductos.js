@@ -1,8 +1,8 @@
 import React from 'react';
 import { SortableContainer, } from 'react-sortable-hoc';
-import { List } from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
-import FlatButton from 'material-ui/FlatButton';
+import  List  from 'material-ui/List';
+import ListSubheader from 'material-ui/List/ListSubheader';
+import Button from 'material-ui/Button';
 
 import TituloCategoria from './tituloCategoria';
 import ProductoContenedor from './HOC_productoContenedor'
@@ -12,27 +12,29 @@ const ListaProductos = SortableContainer(({ items, categoria ,nombreCategoria, o
 //Muestra la lista
   return(
     <List>
-      <Subheader>
+      <ListSubheader>
         <TituloCategoria
-        categoria={categoria}
-        onBorrarCategoria={onBorrarCategoria}
-        onGestionarEdicionCategoria={onGestionarEdicionCategoria}
-        nombreCategoria={nombreCategoria}/>
-      </Subheader>
+          categoria={categoria}
+          onBorrarCategoria={onBorrarCategoria}
+          onGestionarEdicionCategoria={onGestionarEdicionCategoria}
+          nombreCategoria={nombreCategoria}/>
+      </ListSubheader>
 
       {
         items.map((value, index) => (
-            <ProductoContenedor
-              key={value.key}
-              index={index}
-              value={value}
-              onBorrar={onBorrar}
-              onGestionarEdicion={onGestionarEdicion}
-              onGestionarDisponibilidad={onGestionarDisponibilidad}
-               />
+          <ProductoContenedor
+            key={value.key}
+            index={index}
+            value={value}
+            onBorrar={onBorrar}
+            onGestionarEdicion={onGestionarEdicion}
+            onGestionarDisponibilidad={onGestionarDisponibilidad}
+          />
         ))}
-        <br/>
-        <FlatButton label="Agregar Producto" onTouchTap={agregarProducto} primary={true} />
+      <br/>
+      <Button color='primary' style={{marginLeft:'10px'}} onTouchTap={agregarProducto} >
+      Agregar Producto
+      </Button>
       </List>
   );
 });

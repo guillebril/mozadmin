@@ -1,6 +1,6 @@
 import React from 'react';
 import { SortableContainer} from 'react-sortable-hoc';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from 'material-ui/Button';
 
 import CategoriaContenedor from './HOC_categoriaContenedor';
 
@@ -11,12 +11,13 @@ const ListaCategorias = SortableContainer(({ categorias, onGestionarEdicionCateg
   return(
     <div>
       <div>
-         <RaisedButton
-           label="Agregar Categoria"
-           style={{float: 'left', display: 'block', marginLeft: '15px'}}
-           onTouchTap={agregarCategoria}
-           primary={true}
-            />
+        <Button
+          raised
+
+          style={{float: 'left', display: 'block', marginLeft: '15px'}}
+          onTouchTap={agregarCategoria}
+
+        >Agregar Categoria</Button>
           <br/><br/><br/>
       </div>
 

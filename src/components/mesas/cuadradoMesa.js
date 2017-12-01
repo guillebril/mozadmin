@@ -1,7 +1,11 @@
 import React, {Component } from 'react';
 import Paper from 'material-ui/Paper';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from 'material-ui/Dialog';
+import Button from 'material-ui/Button';
 import ContenidoModal from './contenidoModal';
 
 
@@ -29,32 +33,32 @@ class CuadradoMesa extends Component
 
 	render()
 	{
-		const actions = [
-	      <FlatButton
-	        label="Cerrar"
-	        primary={true}
-	        keyboardFocused={true}
-	        onTouchTap={this.gestionarCerrarModalMesa}
-	      />,
-	    ];
 		return (
-			<Paper  zDepth={2}   style={{minWidth:"100px" ,cursor:"pointer", minHeight:"100px" , backgroundColor:"#ecf0f1", display:"inherit", alignItems:"center", margin:"15px"}}
-			onTouchTap={this.gestionarAperturaModalMesa}
+			<Paper  style={{minWidth:"100px" ,cursor:"pointer", minHeight:"100px" , backgroundColor:"#ecf0f1", display:"inherit", alignItems:"center", margin:"15px"}}
+				onTouchTap={this.gestionarAperturaModalMesa}
 			>
 				<p style={{width:"100%", textAlign:"center", fontSize:"36px"}}  >
-				{this.props.mesa.numero}
+					{this.props.mesa.numero}
 				</p>
 
-				<Dialog
-							actions={actions}
-		          title="Mesa"
-		          modal={false}
-		          open={this.state.open}
-		          onRequestClose={this.gestionarCerrarModalMesa}
-							autoScrollBodyContent={true}
-						>
-							<ContenidoModal valorKeyMesa={this.state.valorKeyMesaAbierta} />
-		     </Dialog>
+
+				<Dialog open={this.state.open} onRequestClose={this.gestionarCerrarModalMesa}>
+          <DialogTitle>Detalle de la Mesa</DialogTitle>
+          <DialogContent>
+
+						<ContenidoModal valorKeyMesa={this.state.valorKeyMesaAbierta} />
+
+
+          </DialogContent>
+          <DialogActions>
+
+            <Button onClick={this.gestionarCerrarModalMesa} color="primary">
+              Cerrar
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+
 			</Paper>
 		);
 	}

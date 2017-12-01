@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardText } from 'material-ui/Card';
+import  Card  from 'material-ui/Card';
 
 import base from '../../rebase';
 import ListaProductos from './HOC_listaProductos';
@@ -57,7 +57,7 @@ export default class ItemCategoria extends Component {
 
     switch (elemento) {
       case 'nombre':
-        items[posicion].nombre = nuevo;
+          items[posicion].nombre = nuevo;
           break;
       case 'descripcion':
           items[posicion].descripcion = nuevo;
@@ -91,21 +91,19 @@ export default class ItemCategoria extends Component {
   render() {
     return(
     <Card className='categoria_tarjeta'>
-      <CardText>
-         <ListaProductos
-           items={this.state.items}
-           categoria={this.props.categoria}
-           pressDelay={150}
-           onSortEnd={this.onSortEnd}
-           onGestionarEdicion={this.onGestionarEdicion}
-           onBorrar={this.onBorrar}
-           onBorrarCategoria={this.onBorrarCategoria}
-           agregarProducto={this.agregarProducto}
-           onGestionarDisponibilidad={this.onGestionarDisponibilidad}
-           onGestionarEdicionCategoria={this.props.onGestionarEdicionCategoria}
-           />
-        </CardText>
-      </Card>
+      <ListaProductos
+        items={this.state.items}
+        categoria={this.props.categoria}
+        pressDelay={150}
+        onSortEnd={this.onSortEnd}
+        onGestionarEdicion={this.onGestionarEdicion}
+        onBorrar={this.onBorrar}
+        onBorrarCategoria={this.onBorrarCategoria}
+        agregarProducto={this.agregarProducto}
+        onGestionarDisponibilidad={this.onGestionarDisponibilidad}
+        onGestionarEdicionCategoria={this.props.onGestionarEdicionCategoria}
+      />
+    </Card>
       )
     }
 }

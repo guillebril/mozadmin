@@ -1,51 +1,38 @@
 import React, {Component } from 'react';
 import base from '../../rebase';
-import {List, ListItem} from 'material-ui/List';
+import List from 'material-ui/List';
+
 import Divider from 'material-ui/Divider';
 import Producto from './producto.js';
 
-class ListaPedidosAClasificar extends Component
-{
-  constructor(props)
-  {
-    super(props);
-    this.state = {
-      pedidos:[],
-      total:""
-     };
+export default class ListaPedidosAClasificar extends Component{
+      constructor(props)
+      {
+        super(props);
+        this.state = {
+          pedidos:[],
+          total:""
+         };
 
-  }
-          aceptarProducto(keyProducto)
-            {
-              this.setState({pedidos :{[keyProducto] : {estado : 'aceptado'}}});
-              //this.sumarTotales();
-            }
-            cancelarProducto(keyProducto)
-            {
-              this.setState({pedidos :{[keyProducto] : {estado : 'cancelado'}}});
-              //this.sumarTotales();
-            }
+      }
+  aceptarProducto(keyProducto)
+    {
+      this.setState({pedidos :{[keyProducto] : {estado : 'aceptado'}}});
+      //this.sumarTotales();
+    }
+    cancelarProducto(keyProducto)
+    {
+      this.setState({pedidos :{[keyProducto] : {estado : 'cancelado'}}});
+      //this.sumarTotales();
+    }
 
-            sumarTotales()
-            {
-              var totalPedidos = 0;
-              for(var i in this.state.pedidos)
-              {
-                if(this.state.pedidos[i].estado==="aceptado")
-                {
-                  totalPedidos = totalPedidos + this.state.pedidos[i].total;
-                }
-              }
-              //Falta setearlo en el estado total, adentro de la cuenta, no de pedidos.
-              // Este setea adentro de pedidos, y no esta bien.
-              //this.setState({pedidos: {total : totalPedidos}});
-            }
+
 
 //falta sincronizar con base de datos para obtener los pedidos, osea pararse arriba
 //Uso re-base para sincronizar el estado del objeto mesas con la db
 componentDidMount()
 {
-  base.syncState('restaurantes/oconnells/mesas/'+'-Kti1MOdTgkw0HwEH7Bh'+'/pedidos',
+  base.syncState('restaurantes/oconnells/mesas/-Kti1MOdTgkw0HwEH7Bh/pedidos',
   {
     //cambien el bindToState por syncState
     context: this,
@@ -59,50 +46,46 @@ componentDidMount()
   render()
   {
     //revisar este mapeo que esta mapeando mal
-  var listaPedidosNuevos = Object.values(this.state.pedidos).map(( pedido, index ) => {
-      if(pedido.estado=="Pedido"){
+  var listaPedidosNuevos = Object.values(this.state.pedidos)
+        .filter(pedido => pedido.estado === "Pedido")
+        .map(( pedido, index ) => {
+
       return (
-        <ListItem
-        className="ListaPedidosNuevos"
-        key={pedido.key}>
-            <Producto
+          <Producto
+            key={pedido.key}
             aceptarProducto={this.aceptarProducto.bind(this)}
             cancelarProducto={this.cancelarProducto.bind(this)}
             keyProducto={pedido.key}
             pedido={pedido}
             />
-          </ListItem>
-          )
-        }
+            )
+
     })
-    var listaPedidosViejos = Object.values(this.state.pedidos).map(( pedido, index ) => {
-        if(pedido.estado!="Pedido"){
-        return (
-          <ListItem
-          className="ListaPedidosNuevos"
-          key={pedido.key}>
-              <Producto
+    var listaPedidosViejos = Object.values(this.state.pedidos)
+    .filter(pedido => pedido.estado !== "Pedido")
+    .reverse().map(( pedido, index ) => {
+          return(
+            <Producto
+              key={pedido.key}
               aceptarProducto={this.aceptarProducto.bind(this)}
               cancelarProducto={this.cancelarProducto.bind(this)}
               keyProducto={pedido.key}
               pedido={pedido}
-              />
-            </ListItem>
-            )
-          }
+            />
+          )
       })
 
       //hacer scrollable la lista de abajo
     return(
     <List>
-      <h2>Nuevos pedidos sin revisar</h2>
+      <h1 style={{fontWeight:'300'}}>Nuevos pedidos sin revisar</h1>
       {listaPedidosNuevos}
-      <Divider />
-      <h2>Pedidos revisados</h2>
+      <br/>
+      <br/>
+      <h1 style={{fontWeight:'300'}}>Pedidos revisados</h1>
       {listaPedidosViejos}
       <Divider />
     </List>
     )
   }
 }
-export default ListaPedidosAClasificar;

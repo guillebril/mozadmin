@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Components
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import NavTop from './navTop/navTop'
 import Contenedor from './menu/contenedor'
 
@@ -17,12 +17,14 @@ class App extends Component {
 //este children es el componente que genera el router de routes
   render() {
     const { children } = this.props;
+    const theme = createMuiTheme({
 
+});
     return(
-      <MuiThemeProvider>
+      <MuiThemeProvider  theme={theme}>
         <div className="App">
-            <NavTop/>
-            <Contenedor body={children} />
+          <NavTop/>
+          <Contenedor body={children}/>
         </div>
       </MuiThemeProvider>
     );

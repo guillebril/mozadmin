@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
-import IconMenu from 'material-ui/IconMenu';
+import MoreVertIcon from 'material-ui-icons/MoreVert';
+import LocalDiningIcon from 'material-ui-icons/LocalDining';
+import LocalDrinkIcon from 'material-ui-icons/LocalDrink';
+import CheckIcon from 'material-ui-icons/Check';
 import base from '../../rebase';
 
-import NavigationCheck from 'material-ui/svg-icons/navigation/check';
-import MenuItem from 'material-ui/MenuItem';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import Menu, { MenuItem } from 'material-ui/Menu';
+
 
 
 
@@ -15,6 +17,8 @@ export default class TituloCategoria extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      open: false,
+      anchorEl: null,
       editandoCategoria: false,
       editandoTipoCategoria: false,
       nombre: props.categoria.nombre,
@@ -27,7 +31,9 @@ export default class TituloCategoria extends Component {
 
   onCambiarModoEdicion = () => {
     this.setState(
-      {editandoCategoria : !this.state.editandoCategoria}
+      {editandoCategoria :!this.state.editandoCategoria,
+        open: false,
+      }
     )
   }
 
@@ -40,6 +46,31 @@ export default class TituloCategoria extends Component {
 
  }
 
+  onAbrirMenu =(event) =>{
+    this.setState({
+      open: true,
+      anchorEl: event.currentTarget
+      }  )
+
+}
+
+
+      onCerrarMenu = () => {
+          this.setState({
+        open: false
+        } )
+      }
+
+
+      gestionarEnter = (event) => {
+      if(event.key === 'Enter'){
+        this.setState({
+          editandoCategoria: false
+
+        });
+      }
+    }
+
  onBorrarCategoria = () => {
    const key = this.props.categoria.key
    base.remove('restaurantes/oconnells/menu/' + key);
@@ -47,70 +78,82 @@ export default class TituloCategoria extends Component {
 
   onCambiarTipoCategoria = (event) =>{
     //Forzamos el event.target.name porque no generamos el evento desde un textbox sino un span
-    event.target.name="TipoCategoria";
+
+    this.setState({
+  open: false
+  } )
+  event.target.name="TipoCategoria";
     this.props.onGestionarEdicionCategoria(
       this.props.categoria.tipoCategoria,
       event.target.value,
       this.props.categoria.pos,
        event.target.name)
+
+
   }
 
 
 
 
-  render() {
+  render(){
+   let cambiarA = this.props.categoria.tipoCategoria === 'Comidas' ? 'Bebidas': 'Comidas'
+  let iconoCategoria =  this.props.categoria.tipoCategoria === 'Comidas' ? <LocalDiningIcon/> :  <LocalDrinkIcon/>
   return(
     this.state.editandoCategoria
     ?
   <div style={{display: 'flex',
-    justifyContent: 'space-between'}}>
-        <TextField
-          name="TituloCategoria"
-          id="TituloCategoria"
-          hintText="Hint Text"
-          value={this.props.categoria.nombre}
-          onChange={this.onGestionarEdicionCategoria}
-          />
-      <IconButton
-          className='checkIcono'
-          tooltip="Guardar">
-          <NavigationCheck onTouchTap={this.onCambiarModoEdicion} />
+  justifyContent: 'space-between'}}>
+    <TextField
+      onKeyPress={this.gestionarEnter}
+      autoFocus={true}
+      name="TituloCategoria"
+      id="TituloCategoria"
+      value={this.props.categoria.nombre}
+      onChange={this.onGestionarEdicionCategoria}
+    />
+    <IconButton
+      className='checkIcono'
+    tooltip="Guardar">
+      <CheckIcon onTouchTap={this.onCambiarModoEdicion} />
       </IconButton>
   </div>
 
   :
   <div style={{display: 'flex',
-    justifyContent: 'space-between'}}>
-    <span>
-      {this.props.categoria.nombre}
-    </span>
-    <span>
-      ({this.props.categoria.tipoCategoria})
-    </span>
-    <IconMenu
-       iconButtonElement={
-         <IconButton>
-           <MoreVertIcon/>
-         </IconButton>}
-       targetOrigin={{horizontal: 'right', vertical: 'top'}}
-       anchorOrigin={{horizontal: 'right', vertical: 'top'}}>
+  justifyContent: 'space-between'}}>
 
-       <MenuItem
-         onTouchTap={this.onCambiarModoEdicion}
-         primaryText="Cambiar Nombre"/>
+    <div style={{display: 'flex', alignItems: 'baseline'}} >
+      <div>  {iconoCategoria}</div>
 
-       <MenuItem
-         primaryText="Bebida/Comida"
-         onTouchTap={this.onCambiarTipoCategoria}/>
+      <div style={{fontSize: '25px', fontWeight: 300,paddingLeft: '10px'}}>{this.props.categoria.nombre}</div>
+    </div>
 
-       <MenuItem
-         primaryText="Eliminar"
-         onTouchTap={this.onBorrarCategoria}/>
+    <IconButton
+      aria-owns={this.state.onAbrirMenu ? 'simple-menu' : null}
+      aria-haspopup="true"
+      onClick={this.onAbrirMenu}>
+      <MoreVertIcon/>
+    </IconButton>
+    <Menu
+      id="simple-menu"
+      onRequestClose={this.onCerrarMenu}
+      anchorEl={this.state.anchorEl}
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
 
+      transformOrigin={{
+        vertical: '300',
+        horizontal: 'left',
+      }}
 
-
-   </IconMenu>
-  </div>
+      open={this.state.open}>
+      <MenuItem onClick={this.onCambiarModoEdicion}>Cambiar Nombre</MenuItem>
+      <MenuItem onClick={this.onCambiarTipoCategoria}>Cambiar a {cambiarA}</MenuItem>
+      <MenuItem onClick={this.onBorrarCategoria}>Eliminar</MenuItem>
+    </Menu>
+    </div>
 
     )
   }

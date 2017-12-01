@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
 import base from '../../rebase';
-import {List, ListItem} from 'material-ui/List';
+import List from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Producto from './producto.js';
 
@@ -33,20 +33,7 @@ class ListaProductos extends Component
     newState[campo]= valor;
     this.setState({pedidos :{[keyProducto] :newState}});
   }
-  sumarTotales()
-  {
-    var totalPedidos = 0;
-    for(var i in this.state.pedidos)
-    {
-      if(this.state.pedidos[i].estado==="aceptado")
-      {
-        totalPedidos = totalPedidos + this.state.pedidos[i].total;
-      }
-    }
-    //Falta setearlo en el estado total, adentro de la cuenta, no de pedidos.
-    // Este setea adentro de pedidos, y no esta bien.
-    //this.setState({pedidos: {total : totalPedidos}});
-  }
+
 //falta sincronizar con base de datos para obtener los pedidos, osea pararse arriba
 //Uso re-base para sincronizar el estado del objeto mesas con la db
 componentDidMount()
@@ -68,16 +55,15 @@ componentDidMount()
   var listaPedidos = Object.values(this.state.pedidos).map(( pedido, index ) => {
       return (
         //Revisar si esta bien esto de los key o va en un solo lado
-        <ListItem key={pedido.key}>
-            <Producto
+          <Producto
+            key={pedido.key}
             aceptarProducto={this.aceptarProducto.bind(this)}
             cancelarProducto={this.cancelarProducto.bind(this)}
             onGestionarEdicion={this.onGestionarEdicionProducto.bind(this)}
-
             keyProducto={pedido.key}
             pedido={pedido}
-            />
-          </ListItem>
+          />
+
           )
     })
 

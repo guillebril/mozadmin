@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import {  ListItem } from 'material-ui/List';
+import List,{  ListItem, ListItemText, ListItemSecondaryAction } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import TextField from 'material-ui/TextField';
-
-import ActionDelete from 'material-ui/svg-icons/action/delete';
+import Collapse from 'material-ui/transitions/Collapse';
+import Input, {  InputAdornment } from 'material-ui/Input';
+import DeleteIcon from 'material-ui-icons/Delete'
 import IconButton from 'material-ui/IconButton';
+import Button from 'material-ui/Button';
 
-import Toggle from 'material-ui/Toggle';
+import Switch from 'material-ui/Switch';
+
 
 export default class ItemProducto extends Component {
   constructor(props) {
@@ -15,6 +18,7 @@ export default class ItemProducto extends Component {
     this.state = {
       open: props.value.nombre === "",
       value: props.value,
+
       editando: true,
     };
     this.gestionarApertura=this.gestionarApertura.bind(this)
@@ -42,14 +46,17 @@ export default class ItemProducto extends Component {
 
   gestionarEnter = (event) => {
   if(event.key === 'Enter'){
+
     this.setState({
-      open: !this.state.open,
+      open: false,
     });
   }
 }
 
   gestionarApertura = () =>{
-    this.setState({open: !this.state.open})
+    this.setState({open: !this.state.open,
+
+  })
    }
 
 
@@ -57,102 +64,91 @@ export default class ItemProducto extends Component {
   render()
 
     {
+
+  var fondo = this.state.open ? '#eee' : '#fff'
       return(
         <div>
-          <ListItem
-            open={this.state.open}
-            onNestedListToggle={this.gestionarApertura}
-            secondaryTextLines={2}
-            disabled={this.state.open}
-            primaryTogglesNestedList={true}
-            className='editar_producto'
-            hoverColor={'rgba(0,0,0,0)'}
-            primaryText={
+          {!this.state.open ?
+            <ListItem className='editar_producto'  button onClick={this.gestionarApertura}>
+              <ListItemText primary={ this.props.value.nombre}
 
-            this.state.open ?
+                secondary={this.props.value.descripcion}>
+              </ListItemText>
 
-            <div className="menu_editar_producto">
-              <div className="item_editar_nombre">
-                <TextField
-                hintText="Producto"
-                autoFocus
-                fullWidth={true}
-                onKeyPress={this.gestionarEnter}
-                value={this.props.value.nombre}
-                onChange={this.onGestionarEdicion}
-                name='nombre'/>
-              </div>
-              <div className="item_editar_descripcion">
-                <TextField
-
-                id='descripcion'
-                style={{color: '#888', fontSize: '14px' ,lineHeight: '20px'  }}
-                fullWidth={true}
-                hintText="descripcion.."
-                onKeyPress={this.gestionarEnter}
-                value={this.props.value.descripcion}
-                onChange={this.onGestionarEdicion}
-                multiLine={true}
-                rows={1}
-                name='descripcion'
-                />
-              </div>
-              <div className="item_editar_precio">
-                <TextField
-                name="precio"
-                hintText="$"
-                onKeyPress={this.gestionarEnter}
-                value={this.props.value.precio}
-                onChange={this.onGestionarEdicion}
-                fullWidth={true}
-                />
-              </div>
-              <div className="item_eliminar_producto">
-                <IconButton
-                    tooltip="Borrar"
-                    onTouchTap={() => this.onBorrar(this.props.value.key)}
-                    >
-                  <ActionDelete/>
-                  </IconButton>
-              </div>
-              <div className="item_editar_disponibilidad">
-                <Toggle
-                   label="Disponible"
-                   defaultToggled={this.props.value.disponibilidad}
-                   name='disponibilidad'
-                   onToggle={()=> this.onGestionarDisponibilidad(this.props.value.disponibilidad)}
-                 />
-              </div>
-            </div>
-
-            :
-            <div className='vista_lista_productos'>
-                <div className="item_nombre">
-                  {this.props.value.nombre}
+              <ListItemSecondaryAction >
+                <div style={{marginRight: '10px', marginTop: '12px'}}>
+                  {this.state.open ? null: '$'+ this.props.value.precio}
                 </div>
+              </ListItemSecondaryAction>
 
-                <div className='vista_descrip_precio'>
-                  <div className="item_descripcion">
-                    {this.props.value.descripcion}
-                  </div>
-                  <div className="item_precio">
-                    ${this.props.value.precio}
-                  </div>
-                </div>
-
-            </div>
-            }
-
-          nestedItems={[
-            <ListItem
-              style={{marginLeft: '0', paddingTop: '0'}}
-              key={1}
-              disabled={true}
-            />,
-          ]}>
             </ListItem>
+          :
+          <Collapse component="li" in={this.state.open} transitionDuration="auto" unmountOnExit>
+            <List disablePadding>
+              <ListItem   style={{backgroundColor:fondo}}  >
+                <div className="menu_editar_producto">
+
+
+                  <div className="item_editar_nombre">
+                    <TextField autoFocus fullWidth={true} onKeyPress={this.gestionarEnter}
+                      value={this.props.value.nombre}
+                      onChange={this.onGestionarEdicion}
+                    name='nombre'/>
+                  </div>
+
+                  <div className="item_editar_precio">
+                    <Input
+                      name="precio"
+                      onKeyPress={this.gestionarEnter}
+                      value={this.props.value.precio}
+                      onChange={this.onGestionarEdicion}
+                      fullWidth={true}
+                      startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                    />
+                  </div>
+
+                  <div className="item_editar_descripcion">
+                    <TextField
+                      id='descripcion'
+                      style={{color: '#888', fontSize: '14px' ,lineHeight: '20px'  }}
+                      fullWidth={true}
+                      onKeyPress={this.gestionarEnter}
+                      value={this.props.value.descripcion}
+                      onChange={this.onGestionarEdicion}
+                      multiline={true}
+                      name='descripcion'
+                    />
+                  </div>
+                  <div className="item_editar_controles">
+                    <div className="item_eliminar_producto">
+                      <IconButton
+                        onTouchTap={() => this.onBorrar(this.props.value.key)}>
+                        <DeleteIcon/>
+                      </IconButton>
+                    </div>
+                    <div className="item_editar_disponibilidad">
+                      Disponible
+                      <Switch
+                        checked={this.props.value.disponibilidad}
+                        name='disponibilidad'
+                        onChange={()=> this.onGestionarDisponibilidad(this.props.value.disponibilidad)}
+                      />
+                    </div>
+                    <div className="item_editar_ok">
+                      <Button dense raised color="primary" onClick={this.gestionarApertura}>OK</Button>
+                    </div>
+                  </div>
+                </div>
+              </ListItem>
+            </List>
             <Divider/>
-      </div>
-    )
+          </Collapse>
+
+          }
+
+
+          <Divider/>
+        </div>
+            )
   }
 }

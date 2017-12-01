@@ -1,3 +1,6 @@
+a{
+  text-decoration: none;
+}
 .rootcont: {
   display: 'flex';
   flexWrap: 'wrap';
@@ -6,7 +9,7 @@
 
 .contenedor {
   display: flex;
-  padding: 94px 15px 15px 15px;
+  padding: 0px 15px 15px 15px;
 }
 
 .appbar{
@@ -83,43 +86,57 @@
 }
 
 .item_editar_nombre{
-  flex: 1;
-  max-width: 70%;
-  flex-basis: 80%;
-
-}
-
-.item_editar_descripcion{
-  flex: 1;
-  color: #888 !important;
+  flex: auto;
   flex-basis: 75%;
-  font-size: 80%;
+
 }
-
-
 .item_editar_precio{
-  flex: 1;
+  flex: auto;
   flex-basis: 15%;
   padding-left: 12px;
   padding-right: 5px;
   text-align: right;
 }
 
+.item_editar_descripcion{
+  flex: 1;
+  padding-top: 20px;
+  color: #888 !important;
+  flex-basis: 100%;
+  font-size: 80%;
+}
+
+
+
+
 .item_editar_precio input{
  text-align: center;
 }
+.MuiInputAdornment-root-471.MuiInputAdornment-positionStart-472   {
+    margin-right: 2px !important;
+}
 
 .item_eliminar_producto{
-  flex:1;
-  flex-basis: 16%
+  flex:auto;
 }
 
 .item_editar_disponibilidad{
-  flex: 5;
-  padding-right: 15px;
-  padding-top: 10px;
-  max-width: 140px;
-  flex-basis: 30%;
+
+  flex: auto;
+  padding-right: 5px;
+
+}
+.item_editar_ok{
+flex: auto;
+}
+
+.item_editar_controles{
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /*========PRODUCTO ADMIN==============*/

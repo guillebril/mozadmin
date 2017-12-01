@@ -54,24 +54,14 @@ export default class Categorias extends Component {
       case 'TituloCategoria':
         categorias[posicion].nombre = nuevo;
           break;
-
       case 'TipoCategoria':
-        if(categorias[posicion].tipoCategoria == "Bebidas")
+        if(categorias[posicion].tipoCategoria === "Bebidas")
         {
           categorias[posicion].tipoCategoria = "Comidas";
         }
-        else {if (categorias[posicion].tipoCategoria == "Comidas")
-                {
-                  categorias[posicion].tipoCategoria = "Bebidas";
-                }
-                else {
-                  {
-                    console.log("Error tipo categoria");
-                  }
-                }
-              }
-
-      default:
+        else{
+          categorias[posicion].tipoCategoria = "Bebidas";
+        }
       
     }
     this.setState({ categorias : categorias})
@@ -91,10 +81,10 @@ export default class Categorias extends Component {
   render() {
     return(
     <div>
-         <ListaCategorias
-           categorias={this.state.categorias}
-           pressDelay={150}
-           axis='x'
+      <ListaCategorias
+        categorias={this.state.categorias}
+        pressDelay={150}
+        axis='x'
            onSortEnd={this.onSortEnd}
            onGestionarEdicionCategoria={this.onGestionarEdicionCategoria}
            onBorrarCategoria={this.onBorrarCategoria}

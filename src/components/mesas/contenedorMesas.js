@@ -2,8 +2,7 @@
 import React, {Component } from 'react';
 import base from '../../rebase';
 import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from 'material-ui/Button';
 import CuadradoMesa from './cuadradoMesa';
 import ContenidoModal from './contenidoModal';
 
@@ -70,23 +69,19 @@ class ContenedorMesas extends Component
 
 
 		const actions = [
-	      <FlatButton
-	        label="Eliminar"
-	        primary={true}
-	        onTouchTap={this.handleCloseCancelar}
-	      />,
-	      <FlatButton
-	        label="Cerrar"
-	        primary={true}
-	        keyboardFocused={true}
-	        onTouchTap={this.handleCloseAceptar}
-	      />,
+	      <Button primary  onTouchTap={this.handleCloseCancelar}> Eliminar </Button>
+		
+
+
+				,
+	      <Button primary  keyboardFocused={true} onTouchTap={this.handleCloseAceptar}>
+					Cerrar
+				</Button>,
 	    ];
 		return (
 			<div style={{width:"100%"}}>
 				<div style={{marginBottom:"25px"}}>
-					<RaisedButton label="Agregar Mesa" primary={true}
-					onTouchTap={this.handleOpen} />
+					<Button raised  onTouchTap={this.handleOpen}>Agregar Mesa</Button>
 					<Dialog
 	          title="Nueva cuenta"
 	          actions={actions}
