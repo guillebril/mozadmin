@@ -10,7 +10,7 @@ const ListaCategorias = SortableContainer(({ categorias, onGestionarEdicionCateg
 //Muestra la lista
   return(
     <div>
-      <div>
+      <div style={{paddingBottom: '20px'}}>
         <Button
           raised
 
