@@ -1,10 +1,16 @@
 // Dependencias
 import React, {Component } from 'react';
 import base from '../../rebase';
-import Dialog from 'material-ui/Dialog';
+// import Dialog from 'material-ui/Dialog';
 import Button from 'material-ui/Button';
 import CuadradoMesa from './cuadradoMesa';
 import ContenidoModal from './contenidoModal';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
 
 
 class ContenedorMesas extends Component
@@ -70,7 +76,7 @@ class ContenedorMesas extends Component
 
 		const actions = [
 	      <Button primary  onTouchTap={this.handleCloseCancelar}> Eliminar </Button>
-		
+
 
 
 				,
@@ -83,14 +89,19 @@ class ContenedorMesas extends Component
 				<div style={{marginBottom:"25px"}}>
 					<Button raised  onTouchTap={this.handleOpen}>Agregar Mesa</Button>
 					<Dialog
-	          title="Nueva cuenta"
-	          actions={actions}
-	          modal={false}
-	          open={this.state.open}
-	          onRequestClose={this.handleClose}
-						valorKeyMesa={this.state.valorKeyMesaCreada}
-        	>
-				<ContenidoModal valorKeyMesa={this.state.valorKeyMesaCreada} />
+					 open={this.state.open}
+					 onClose={this.handleClose}
+					 aria-labelledby="alert-dialog-title"
+
+					 >
+					 <DialogTitle id="alert-dialog-title">{"Nueva cuenta"}</DialogTitle>
+					 <DialogContent>
+					 <ContenidoModal valorKeyMesa={this.state.valorKeyMesaCreada} />
+					 </DialogContent>
+					 <DialogActions>
+					 {actions}
+					 </DialogActions>
+					
 				</Dialog>
 				</div>
 
