@@ -73,17 +73,6 @@ class ContenedorMesas extends Component
 			return ( <CuadradoMesa key={mesa.key} mesa={mesa}/> )
 		})
 
-
-		const actions = [
-	      <Button primary  onTouchTap={this.handleCloseCancelar}> Eliminar </Button>
-
-
-
-				,
-	      <Button primary  keyboardFocused={true} onTouchTap={this.handleCloseAceptar}>
-					Cerrar
-				</Button>,
-	    ];
 		return (
 			<div style={{width:"100%"}}>
 				<div style={{marginBottom:"25px"}}>
@@ -99,9 +88,12 @@ class ContenedorMesas extends Component
 					 <ContenidoModal valorKeyMesa={this.state.valorKeyMesaCreada} />
 					 </DialogContent>
 					 <DialogActions>
-					 {actions}
+             <Button primary  onTouchTap={this.handleCloseCancelar}> Eliminar </Button>
+             <Button primary  keyboardFocused={true} onTouchTap={this.handleCloseAceptar}>
+             Cerrar
+           </Button>
 					 </DialogActions>
-					
+
 				</Dialog>
 				</div>
 
