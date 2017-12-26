@@ -73,7 +73,7 @@ export default class ListaPedidosAClasificar extends Component {
           var listaPedidos = Object.entries(mesa.pedidos)
             //pedido es una matriz que tiene dos columnas en la 0 estan los keys en la 1 esta el objeto del pedido.
             .filter(pedido => pedido[1].estado !== "Pedido")
-            .map(([key, pedido], index) => {
+            .reverse().map(([key, pedido], index) => {
               return (
                 <Producto
                   key={key}
@@ -94,11 +94,8 @@ export default class ListaPedidosAClasificar extends Component {
     return (
       <List>
       <h1 style={{fontWeight:'300'}}>Nuevos pedidos sin revisar</h1>
-<<<<<<< HEAD
       {listaMesasNuevas}
-=======
-      {listaMesas}
->>>>>>> origin/master
+
       <br/>
       <br/>
       <h1 style={{fontWeight:'300'}}>Pedidos revisados</h1>
