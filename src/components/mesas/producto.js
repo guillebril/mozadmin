@@ -23,11 +23,11 @@ export default class Producto extends Component {
   }
 
   AceptarPedido = () => {
-    this.props.aceptarProducto(this.props.pedido.key);
+    this.props.aceptarProducto(this.props.keyProducto, this.props.mesaKey);
   }
 
   CancelarPedido = () => {
-    this.props.cancelarProducto(this.props.pedido.key);
+    this.props.cancelarProducto(this.props.keyProducto, this.props.mesaKey);
   }
 
   onGestionarEdicion = (nuevo) => {
@@ -58,7 +58,8 @@ export default class Producto extends Component {
           justifyContent: 'space-between',
         alignItems: 'center', lineHeight: '20px'}}>
           <div style={{flexBasis:'8%', fontSize: '35px', paddingLeft: '5px', fontWeight: '300'}}>
-            6
+            {this.props.pedido.numeroMesa}
+
           </div>
 
           <div style={{ flexBasis:'60%', flexDirection:'column'}}>

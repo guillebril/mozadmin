@@ -1,5 +1,5 @@
 // Dependencias
-import React, {Component } from 'react';
+import React, { Component } from 'react';
 import base from '../../rebase';
 // import Dialog from 'material-ui/Dialog';
 import Button from 'material-ui/Button';
@@ -12,80 +12,63 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog';
 
-
-class ContenedorMesas extends Component
-{
-	constructor(props)
-	{
-		super(props);
-		this.state = {mesas:[],
-		open:false,
-		valorKeyMesaCreada:''}
-		this.agregarMesa = this.agregarMesa.bind(this);
-	}
+class ContenedorMesas extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mesas: [],
+      open: false,
+      valorKeyMesaCreada: ''
+    }
+    this.agregarMesa = this.agregarMesa.bind(this);
+  }
   handleOpen = () => {
 
-		var valorTemp = this.agregarMesa();
-		this.setState({valorKeyMesaCreada: valorTemp});
-		this.setState({open: true});
-		console.log(valorTemp);
+    var valorTemp = this.agregarMesa();
+    this.setState({ valorKeyMesaCreada: valorTemp });
+    this.setState({ open: true });
+    console.log(valorTemp);
   };
 
   handleCloseCancelar = () => {
-    this.setState({open: false});
-		base.remove('restaurantes/oconnells/mesas/'+this.state.valorKeyMesaCreada);
+    this.setState({ open: false });
+    base.remove('restaurantes/oconnells/mesas/' + this.state.valorKeyMesaCreada);
   };
-	handleCloseAceptar = () => {
-    this.setState({open: false});
+  handleCloseAceptar = () => {
+    this.setState({ open: false });
   };
 
+  //Uso re-base para sincronizar el estado del objeto mesas con la db
+  componentDidMount() {
+    base.bindToState('restaurantes/oconnells/mesas', {
+      context: this,
+      state: 'mesas',
+      queries: { orderByChild: 'pos' },
+      keepKeys: true,
+      asArray: true
+    });
+  }
 
-	//Uso re-base para sincronizar el estado del objeto mesas con la db
-	componentDidMount()
-	{
-		base.bindToState('restaurantes/oconnells/mesas',
-		{
-			context: this,
-			state: 'mesas',
-			queries: {orderByChild: 'pos'},
-			keepKeys: true,
-			asArray: true
-		});
-	}
+  agregarMesa = () => {
+    var valorPush = base.push('restaurantes/oconnells/mesas', {
+      data: {
+        numero: "2",
+        codigoMesa: "dgm92",
+        total: '0',
+        fechaHoraIngreso: '',
+        estado: 'en espera',
+      },
+    });
+    return (valorPush.key)
+  }
 
-		 agregarMesa =() => {
-			var valorPush = base.push('restaurantes/oconnells/mesas', {
-				 data:{
-					 numero:"2",
-					 codigoMesa:"dgm92",
-					 total:'0',
-					 fechaHoraIngreso:'',
-					 estado:'en espera',
-				 },
-			 });
-			 return (valorPush.key)
-		 }
+  render() {
+    var mesasActivas = Object.values(this.state.mesas).map((mesa, index) => {
+      return (<CuadradoMesa key={mesa.key} mesa={mesa}/>)
+    })
 
-
-	render()
-	{
-		var mesasActivas = Object.values(this.state.mesas).map(( mesa, index ) => {
-			return ( <CuadradoMesa key={mesa.key} mesa={mesa}/> )
-		})
-
-
-		const actions = [
-	      <Button primary  onTouchTap={this.handleCloseCancelar}> Eliminar </Button>
-
-
-
-				,
-	      <Button primary  keyboardFocused={true} onTouchTap={this.handleCloseAceptar}>
-					Cerrar
-				</Button>,
-	    ];
-		return (
-			<div style={{width:"100%"}}>
+    return (
+      <div style={{width:"100%"}}>
 				<div style={{marginBottom:"25px"}}>
 					<Button raised  onTouchTap={this.handleOpen}>Agregar Mesa</Button>
 					<Dialog
@@ -99,9 +82,13 @@ class ContenedorMesas extends Component
 					 <ContenidoModal valorKeyMesa={this.state.valorKeyMesaCreada} />
 					 </DialogContent>
 					 <DialogActions>
-					 {actions}
+             <Button primary  onTouchTap={this.handleCloseCancelar}> Eliminar </Button>
+
+            <Button primary  keyboardFocused={true} onTouchTap={this.handleCloseAceptar}>
+              Cerrar
+            </Button>
 					 </DialogActions>
-					
+
 				</Dialog>
 				</div>
 
@@ -110,8 +97,8 @@ class ContenedorMesas extends Component
 
 				</div>
 			</div>
-		);
-	}
+    );
+  }
 }
 
 export default ContenedorMesas;
