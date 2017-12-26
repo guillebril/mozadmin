@@ -94,7 +94,11 @@ export default class ListaPedidosAClasificar extends Component {
     return (
       <List>
       <h1 style={{fontWeight:'300'}}>Nuevos pedidos sin revisar</h1>
+<<<<<<< HEAD
       {listaMesasNuevas}
+=======
+      {listaMesas}
+>>>>>>> origin/master
       <br/>
       <br/>
       <h1 style={{fontWeight:'300'}}>Pedidos revisados</h1>

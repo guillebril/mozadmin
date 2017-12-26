@@ -8,7 +8,6 @@ import ContenidoModal from './contenidoModal';
 import Dialog, {
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
 
@@ -83,10 +82,7 @@ class ContenedorMesas extends Component {
 					 </DialogContent>
 					 <DialogActions>
              <Button primary  onTouchTap={this.handleCloseCancelar}> Eliminar </Button>
-
-            <Button primary  keyboardFocused={true} onTouchTap={this.handleCloseAceptar}>
-              Cerrar
-            </Button>
+             <Button primary  keyboardFocused={true} onTouchTap={this.handleCloseAceptar}> Cerrar </Button>
 					 </DialogActions>
 
 				</Dialog>
