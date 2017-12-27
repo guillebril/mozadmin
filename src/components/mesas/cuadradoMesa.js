@@ -36,23 +36,17 @@ class CuadradoMesa extends Component {
 					{this.props.mesa.numero}
 				</p>
 
-
-				<Dialog open={this.state.open} onRequestClose={this.gestionarCerrarModalMesa}>
+				<Dialog open={this.state.open}>
           <DialogTitle>Detalle de la Mesa</DialogTitle>
           <DialogContent>
-
 						<ContenidoModal mesa={this.props.mesa} valorKeyMesa={this.state.valorKeyMesaAbierta} />
-
-
           </DialogContent>
           <DialogActions>
-
             <Button onClick={this.gestionarCerrarModalMesa} color="primary">
               Cerrar
             </Button>
           </DialogActions>
         </Dialog>
-
 
 			</Paper>
     );
