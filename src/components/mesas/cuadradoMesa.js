@@ -27,6 +27,15 @@ class CuadradoMesa extends Component {
     this.setState({ open: false });
   }
 
+  eliminarMesa = () =>
+  {
+    //preguntar si esta ok borrar el mesa y dps borrar
+    console.log("borrar mesa");
+    console.log(this.props.mesa.key);
+    //revisar si hay que borrar aca, o mandarlo arriba para que la borre el padre
+    //base.remove('restaurantes/oconnells/mesas/' + this.props.mesa.key);
+  }
+
   render() {
     return (
       <Paper  style={{minWidth:"100px" ,cursor:"pointer", minHeight:"100px" , backgroundColor:"#ecf0f1", display:"inherit", alignItems:"center", margin:"15px"}}
@@ -42,6 +51,9 @@ class CuadradoMesa extends Component {
 						<ContenidoModal mesa={this.props.mesa} valorKeyMesa={this.state.valorKeyMesaAbierta} />
           </DialogContent>
           <DialogActions>
+          <Button onClick={this.eliminarMesa} color="secondary">
+            Borrar mesa
+          </Button>
             <Button onClick={this.gestionarCerrarModalMesa} color="primary">
               Cerrar
             </Button>
