@@ -31,7 +31,6 @@ export default class Producto extends Component {
   }
 
   onGestionarEdicion = (nuevo) => {
-    console.log("entro en producto onGestionarEdicion" + this.props.pedido.key + nuevo.target.name + nuevo.target.value);
     this.props.onGestionarEdicion(this.props.pedido.key, nuevo.target.name, nuevo.target.value);
     //Agregar un if y averiguar si cambio la cantidad, y recalcular el precio total
   }

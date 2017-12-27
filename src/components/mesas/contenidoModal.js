@@ -1,4 +1,4 @@
-// Dependencias
+  // Dependencias
 import React, { Component } from 'react';
 import base from '../../rebase';
 import TextField from 'material-ui/TextField';
@@ -55,8 +55,29 @@ class contenidoModal extends Component {
       datosMesa: { codigoMesa: text },
     });
   }
+
+  calcularTotalMesa = () =>
+  {
+      var totalTemporal = 0;
+      if(this.state.datosMesa.pedidos != null)
+      {
+      var pedidos = Object.values(this.state.datosMesa.pedidos)
+        .map((pedido, index) => {
+            if (pedido != null) {
+          if(pedido.estado === 'aceptado')
+          {
+            totalTemporal+= Number(pedido.total);
+          }
+        }
+      })
+    }
+    return totalTemporal;
+  }
+
   render() {
-    var TotalText = "Total: $" + this.state.datosMesa.total;
+
+
+    var TotalText = "Total: $" + this.calcularTotalMesa();
     const style = {
       margin: 12,
 
