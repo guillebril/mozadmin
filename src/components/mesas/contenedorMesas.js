@@ -60,10 +60,14 @@ class ContenedorMesas extends Component {
     });
     return (valorPush.key)
   }
+  borrarMesa = (keyMesaBorrar) =>
+  {
+    base.remove('restaurantes/oconnells/mesas/' + keyMesaBorrar);
+  }
 
   render() {
     var mesasActivas = Object.values(this.state.mesas).map((mesa, index) => {
-      return (<CuadradoMesa key={mesa.key} mesa={mesa}/>)
+      return (<CuadradoMesa key={mesa.key} mesa={mesa} borrarMesa={this.borrarMesa.bind(this)}/>)
     })
 
     return (
