@@ -6,6 +6,7 @@ import Button from 'material-ui/Button';
 import Switch from 'material-ui/Switch';
 import ListaProductos from './listaProductos';
 
+
 class contenidoModal extends Component {
   constructor(props) {
     super(props);
@@ -109,6 +110,7 @@ class contenidoModal extends Component {
         />
         <br/>
         Estado de la Mesa:
+
         <Switch
           label="Estado"
           checked={this.state.datosMesa.estadoMesa === 'abierta' ? true : false}
