@@ -62,7 +62,10 @@ export default class Categorias extends Component {
         else{
           categorias[posicion].tipoCategoria = "Bebidas";
         }
-      
+        break;
+      default:
+      break;
+
     }
     this.setState({ categorias : categorias})
   };

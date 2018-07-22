@@ -44,7 +44,6 @@ class CuadradoMesa extends Component {
   //backgroundColor:"#ecf0f1"
   render() {
     var estiloMesaCuadrado;
-console.log(this.props.mesa.estadoMesa);
     switch (this.props.mesa.estadoMesa) {
       case 'cerrada':
         estiloMesaCuadrado = {

@@ -25,12 +25,12 @@ export default class NavTop extends Component {
               MozApp
             </Typography>
             <Link  to='/'>
-              <Button color="contrast" > Mi Menu</Button>
+              <Button color="default" > Mi Menu</Button>
             </Link>
 
 
             <Link to='/mesas'>
-              <Button color="contrast" > Mesas</Button>
+              <Button color="default" > Mesas</Button>
             </Link>
           </Toolbar>
 

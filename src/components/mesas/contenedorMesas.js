@@ -66,14 +66,27 @@ class ContenedorMesas extends Component {
   }
 
   render() {
-    var mesasActivas = Object.values(this.state.mesas).map((mesa, index) => {
+
+    var mesasAbiertas = Object.values(this.state.mesas)
+    .filter (mesa => mesa.estadoMesa === "abierta")
+    .map((mesa, index) => {
       return (<CuadradoMesa key={mesa.key} mesa={mesa} borrarMesa={this.borrarMesa.bind(this)}/>)
-    })
+    });
+    var mesasCerradas = Object.values(this.state.mesas)
+    .filter (mesa => mesa.estadoMesa === "cerrada")
+    .map((mesa, index) => {
+      return (<CuadradoMesa key={mesa.key} mesa={mesa} borrarMesa={this.borrarMesa.bind(this)}/>)
+    });
+    var mesasPedidasCuenta = Object.values(this.state.mesas)
+    .filter (mesa => mesa.estadoMesa === "cuenta")
+    .map((mesa, index) => {
+      return (<CuadradoMesa key={mesa.key} mesa={mesa} borrarMesa={this.borrarMesa.bind(this)}/>)
+    });
 
     return (
       <div style={{width:"100%"}}>
 				<div style={{marginBottom:"25px"}}>
-					<Button raised  onTouchTap={this.handleOpen}>Agregar Mesa</Button>
+					<Button  onTouchTap={this.handleOpen}>Agregar Mesa</Button>
 					<Dialog
 					 open={this.state.open}
 					 onClose={this.handleClose}
@@ -93,8 +106,16 @@ class ContenedorMesas extends Component {
 				</div>
 
 				<div style={{display:"flex",  flexWrap:"wrap"}}>
-				{mesasActivas}
-
+        <h1>Mesas Abiertas</h1>
+				{mesasAbiertas}
+				</div>
+        <div style={{display:"flex",  flexWrap:"wrap"}}>
+        <h1>Cuentas pedidas</h1>
+        {mesasPedidasCuenta}
+				</div>
+        <div style={{display:"flex",  flexWrap:"wrap"}}>
+        <h1>Mesas Cerradas</h1>
+        {mesasCerradas}
 				</div>
 			</div>
     );
